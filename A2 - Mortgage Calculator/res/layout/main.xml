@@ -20,8 +20,8 @@
             <Spinner android:id="@+id/term_spinner" android:layout_width="wrap_content" android:layout_height="wrap_content" android:prompt="@string/term_prompt"></Spinner>
         </TableRow>
         <TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <Button android:text="Clear" android:id="@+id/clear_button" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-            <Button android:text="Calculatron!" android:id="@+id/calculate_button" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+            <Button android:text="Clear" android:id="@+id/clear_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="clearInputs"></Button>
+            <Button android:text="Calculatron!" android:id="@+id/calculate_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="calculateMortgage"></Button>
         </TableRow>
     </TableLayout>
     <TextView android:text="TextView" android:id="@+id/output_text" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.26"></TextView>
