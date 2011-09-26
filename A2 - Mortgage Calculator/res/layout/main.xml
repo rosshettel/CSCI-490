@@ -7,24 +7,24 @@
     <TableLayout android:layout_width="match_parent" android:id="@+id/tableLayout1" android:stretchColumns="1" android:layout_height="wrap_content">
         <TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="right">
             <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:text="Principal($)" android:id="@+id/textView1" android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
-            <EditText android:inputType="numberDecimal" android:id="@+id/mortgage_input" android:layout_height="wrap_content" android:layout_width="wrap_content"></EditText>
+            <EditText android:inputType="numberDecimal" android:id="@+id/mortgage_input" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="30dip" android:layout_marginRight="20dip"></EditText>
         </TableRow>
         <TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content" android:layout_height="wrap_content">
             <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:text="Interest(%)" android:id="@+id/textView2" android:layout_height="wrap_content" android:layout_width="wrap_content" android:gravity="right"></TextView>
-            <EditText android:inputType="numberDecimal" android:id="@+id/interest_input" android:layout_height="wrap_content" android:layout_width="wrap_content">
+            <EditText android:inputType="numberDecimal" android:id="@+id/interest_input" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="30dip" android:layout_marginRight="20dip">
                 <requestFocus></requestFocus>
             </EditText>
         </TableRow>
         <TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content" android:layout_height="wrap_content">
             <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:text="Term(years)" android:id="@+id/textView3" android:layout_height="wrap_content" android:layout_width="wrap_content" android:gravity="right|fill_vertical"></TextView>
-            <EditText android:inputType="numberDecimal" android:id="@+id/term_input" android:layout_height="wrap_content" android:layout_width="wrap_content"></EditText>
+            <EditText android:inputType="numberDecimal" android:id="@+id/term_input" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="30dip" android:layout_marginRight="20dip"></EditText>
         </TableRow>
         <TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content" android:layout_height="wrap_content">
             <Button android:text="Clear" android:id="@+id/clear_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="clearInputs"></Button>
             <Button android:text="Calculatron!" android:id="@+id/calculate_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="calculateMortgage"></Button>
         </TableRow>
     </TableLayout>
-    <TextView android:text="TextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.06" android:id="@+id/output_monthly_payment"></TextView>
+    <TextView android:text="TextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.06" android:id="@+id/output_mortgage"></TextView>
     <TextView android:text="TextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.06" android:id="@+id/output_repayment"></TextView>
-    <TextView android:text="TextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/error_output" android:layout_weight="0.39"></TextView>
+    <TextView android:text="TextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.39" android:id="@+id/output_error"></TextView>
 </LinearLayout>
