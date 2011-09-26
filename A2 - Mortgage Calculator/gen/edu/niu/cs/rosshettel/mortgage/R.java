@@ -19,10 +19,11 @@ public final class R {
     public static final class id {
         public static final int calculate_button=0x7f06000c;
         public static final int clear_button=0x7f06000b;
-        public static final int error_text=0x7f06000e;
+        public static final int error_output=0x7f06000f;
         public static final int interest_input=0x7f060006;
         public static final int mortgage_input=0x7f060003;
-        public static final int output_text=0x7f06000d;
+        public static final int output_monthly_payment=0x7f06000d;
+        public static final int output_repayment=0x7f06000e;
         public static final int tableLayout1=0x7f060000;
         public static final int tableRow1=0x7f060001;
         public static final int tableRow2=0x7f060004;
