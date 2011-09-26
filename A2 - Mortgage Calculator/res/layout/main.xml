@@ -24,7 +24,7 @@
             <Button android:text="Calculatron!" android:id="@+id/calculate_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="calculateMortgage"></Button>
         </TableRow>
     </TableLayout>
-    <TextView android:text="TextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.06" android:id="@+id/output_mortgage"></TextView>
-    <TextView android:text="TextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.06" android:id="@+id/output_repayment"></TextView>
-    <TextView android:text="TextView" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.39" android:id="@+id/output_error"></TextView>
+    <TextView android:text="" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.06" android:id="@+id/output_mortgage" android:textSize="10pt"></TextView>
+    <TextView android:text="" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.06" android:id="@+id/output_repayment" android:textSize="10pt"></TextView>
+    <TextView android:text="" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_weight="0.39" android:id="@+id/output_error" android:textSize="8pt"></TextView>
 </LinearLayout>
