@@ -1,3 +1,19 @@
+/****************************************************************
+   PROGRAM:   Assignment 2
+   AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+   LOGON ID:  Z1549355, Z159807, Z1624450
+   DUE DATE:  9/26 at class time
+
+   FUNCTION:  This is a mortgage calculator.  It will calculate your monthly
+              payment and the total amount to be repaid.
+
+   INPUT:     principal, interest, term from user
+
+   OUTPUT:    monthly payment, total amount to be repaid, and any errors
+
+   NOTES:     We tried using the formula presented on the assignment, but it was
+              wrong.  So we did it a different way.
+****************************************************************/
 package edu.niu.cs.rosshettel.mortgage;
 
 import java.text.DecimalFormat;
@@ -17,6 +33,14 @@ public class MortgageCalculatorActivity extends Activity {
 	
     /** Called when the activity is first created. */
     @Override
+    /****************************************************************
+		FUNCTION:   void onCreate(Bundle)
+		ARGUMENTS:  Bundle
+		RETURNS:    nothing
+		NOTES:      Equivalent to main() in other programming languages.  All
+		            widgets will be created here, and all functions will be called
+		            from here.
+     ****************************************************************/
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
@@ -62,8 +86,8 @@ public class MortgageCalculatorActivity extends Activity {
     	}
     	
     	//calculate payments 
-    	monthlyResult = calculateMonthlyPayment(principle_num, interestPercent, term_num);
-    	repaymentResult = calculateTotalRepayment(principle_num, interestPercent, term_num);
+    	monthlyResult = calculateMonthlyPayment(principle_num, interestPercent, term_num*12);
+    	repaymentResult = calculateTotalRepayment(monthlyResult, term_num*12);
   
     	//convert results to decimal format and output
     	output_mortgage.setText("Your monthly payment is: $" + df.format(monthlyResult)); 
@@ -72,7 +96,6 @@ public class MortgageCalculatorActivity extends Activity {
     
     /*
      * Grab the data from the user inputs, and calculate the mortgage rate
-     * John Miller makes an edit here to test github.
      */
     
     /****************************************************************
@@ -89,15 +112,14 @@ public class MortgageCalculatorActivity extends Activity {
     		return monthlyPmt;
    		}
     /****************************************************************
-    	FUNCTION:   double calculateTotalRepayment(double, double, int)
-    	ARGUMENTS:  principle (double), annual interest rate (double), term in months (int)
+    	FUNCTION:   double calculateTotalRepayment(double, int)
+    	ARGUMENTS:  monthly payment (double), term in months (int)
     	RETURNS:    total amount of repayment (double)
     	NOTES:      This calculates the total repayment on a mortgage.
      ****************************************************************/
-    public double calculateTotalRepayment(double principle, double annualInterestRate, int numMonths)
+    public double calculateTotalRepayment(double monthlyPayment, int numMonths)
     	{
-    		double finalValue = principle*Math.pow((1+annualInterestRate), (numMonths/12));
-    		return finalValue;
+    		return monthlyPayment*numMonths;
     	}
     /*
      * Clear all the input data
