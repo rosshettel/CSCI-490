@@ -19,10 +19,13 @@ public class MortgageCalculatorActivity extends Activity {
      * Grab the data from the user inputs, and calculate the mortgage rate
      * John Miller makes an edit here to test github.
      */
-    public void calculateMortgage(View theButton) {
-    	//do something intelligent here
-    	Log.v("debugging", "we clicked the calculate button!");
-    }
+    public double calculateMonthlyPayment(double principle, double annualInterestRate,
+			int numMonths) 
+    		{
+    			double monthlyInterestRate = annualInterestRate/1200;
+    			double monthlyPmt = principle*monthlyInterestRate/(1-Math.pow((1+monthlyInterestRate),(-numMonths)));
+    			return monthlyPmt;
+    		}
     
     /*
      * Clear all the input data
