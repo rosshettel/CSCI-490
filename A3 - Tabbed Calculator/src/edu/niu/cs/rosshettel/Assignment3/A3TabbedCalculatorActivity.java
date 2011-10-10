@@ -11,9 +11,22 @@ public class A3TabbedCalculatorActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.main);
-        TabHost host;
-        Intent a, b;
+        setContentView(R.layout.main);
+        
+        TabHost pgmTabs = (TabHost)findViewById(R.id.tabhost);
+        pgmTabs.setup();
+        TabHost.TabSpec spec = pgmTabs.newTabSpec("tag1");
+        
+        spec.setContent(R.id.tab1);
+        spec.setIndicator("Amort");
+        pgmTabs.addTab(spec);
+        
+        spec = pgmTabs.newTabSpec("tag2");
+        
+        spec.setContent(R.id.tab2);
+        spec.setIndicator("Interest");
+        pgmTabs.addTab(spec);
+
 
         
     }

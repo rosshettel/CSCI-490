@@ -15,6 +15,7 @@ public final class R {
     }
     public static final class id {
         public static final int tab1=0x7f050001;
+        public static final int tab2=0x7f050002;
         public static final int tabhost=0x7f050000;
     }
     public static final class layout {
