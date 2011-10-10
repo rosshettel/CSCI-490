@@ -54,4 +54,15 @@ public class A3TabbedCalculatorActivity extends Activity {
     	{
     		return monthlyPayment*numMonths;
     	}
+    /****************************************************************
+		FUNCTION:   double calculateFinalValue(double, double, int)
+		ARGUMENTS:  principle (double), annual interest rate (double), term in years (int)
+		RETURNS:    final value (double)
+		NOTES:      This calculates the final value for an investment.
+     ****************************************************************/
+    public double calculateFinalValue(double principle, double annualInterestRate, int numYears)
+    	{
+    		return principle * Math.pow((1 + annualInterestRate), numYears);
+    	}
+
 }
