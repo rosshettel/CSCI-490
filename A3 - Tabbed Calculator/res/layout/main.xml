@@ -66,13 +66,19 @@
 		            <Button android:text="@string/clear" 
 			            android:id="@+id/clear_button" 
 			            android:layout_width="wrap_content" 
-			            android:layout_height="wrap_content" 
-			            android:onClick="clearInputs"/>
+			            android:layout_height="wrap_content"/>
 		            <Button android:text="@string/calculate" 
 			            android:id="@+id/calculate_button" 
 			            android:layout_width="wrap_content" 
+			            android:layout_height="wrap_content"/>
+		        </TableRow>
+		        <TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content" android:layout_height="wrap_content">
+		        	<TextView android:textAppearance="?android:attr/textAppearanceMedium" 
+			            android:text="@string/month_payment" 
 			            android:layout_height="wrap_content" 
-			            android:onClick="calculateMortgage"/>
+			            android:layout_width="wrap_content" 
+			            android:gravity="right|fill_vertical"/>
+		            
 		        </TableRow>
 			</TableLayout>
 			<Button android:id="@+id/tab2"
