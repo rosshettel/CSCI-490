@@ -11,11 +11,13 @@
     <string name="time_hint">Enter time in years</string>
     
     <!-- Borrow Tab -->
+    <string name="borrow_tab">Borrow</string>
     <string name="amount_borrow_hint">Enter loan amount</string>
     <string name="month_payment">Monthly Payment:</string>
     <string name="total_payment">Total Payment:</string>
     
     <!-- Invest Tab -->
+    <string name="invest_tab">Invest</string>
     <string name="amount_invest_hint">Enter amount to invest</string>
     <string name="final_value">Final Value:</string>
     

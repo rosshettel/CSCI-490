@@ -20,13 +20,13 @@ public class A3TabbedCalculatorActivity extends Activity {
         
         /*  */
         spec.setContent(R.id.tab1);
-        spec.setIndicator("Borrow",	res.getDrawable(R.drawable.tab_borrow));
+        spec.setIndicator(res.getText(R.string.borrow_tab),	res.getDrawable(R.drawable.tab_borrow));
         pgmTabs.addTab(spec);
         
         spec = pgmTabs.newTabSpec("tag2");
         
         spec.setContent(R.id.tab2);
-        spec.setIndicator("Invest", res.getDrawable(R.drawable.tab_invest));
+        spec.setIndicator(res.getText(R.string.invest_tab), res.getDrawable(R.drawable.tab_invest));
         pgmTabs.addTab(spec);
 
 
