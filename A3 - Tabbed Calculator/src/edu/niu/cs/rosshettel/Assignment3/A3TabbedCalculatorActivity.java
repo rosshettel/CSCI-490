@@ -1,6 +1,7 @@
 package edu.niu.cs.rosshettel.Assignment3;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TabHost;
@@ -12,19 +13,20 @@ public class A3TabbedCalculatorActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        Resources res = getResources();
         TabHost pgmTabs = (TabHost)findViewById(R.id.tabhost);
         pgmTabs.setup();
         TabHost.TabSpec spec = pgmTabs.newTabSpec("tag1");
         
         /*  */
         spec.setContent(R.id.tab1);
-        spec.setIndicator("Borrow");
+        spec.setIndicator("Borrow",	res.getDrawable(R.drawable.tab_borrow));
         pgmTabs.addTab(spec);
         
         spec = pgmTabs.newTabSpec("tag2");
         
         spec.setContent(R.id.tab2);
-        spec.setIndicator("Investment");
+        spec.setIndicator("Invest", res.getDrawable(R.drawable.tab_invest));
         pgmTabs.addTab(spec);
 
 
