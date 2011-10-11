@@ -211,6 +211,8 @@ public class A3TabbedCalculatorActivity extends Activity {
     	output_mortgage.setText("");
 		output_repayment.setText("");
 		
+        mortOutputError.setText(""); //reset the error messages
+		
     	Log.d("A2_debug", "Cleared all the mortgage inputs.");
     }
 
@@ -228,6 +230,9 @@ public class A3TabbedCalculatorActivity extends Activity {
     	
     	//reset all the output dialog as well
     	outputFinalValue.setText("");
+    	
+        investOutputError.setText(""); //reset the error messages
+
 		
     	Log.d("A2_debug", "Cleared all the investment inputs.");
     }
