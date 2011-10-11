@@ -1,3 +1,20 @@
+/****************************************************************
+   PROGRAM:   Assignment 3
+   AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+   LOGON ID:  Z1549355, Z159807, Z1624450
+   DUE DATE:  10/12 at class time
+
+   FUNCTION:  This is a mortgage and investment calculator.  It will calculate
+    		  your monthly payment and the total amount to be repaid for a 
+    		  mortgage, and the final value for an investment.
+
+   INPUT:     principal, interest, term from user
+
+   OUTPUT:    monthly payment, total amount to be repaid, and any errors
+              also, final value and any errors
+
+   NOTES:     None.
+****************************************************************/
 package edu.niu.cs.rosshettel.Assignment3;
 
 import java.text.DecimalFormat;
@@ -20,7 +37,14 @@ public class A3TabbedCalculatorActivity extends Activity {
 			investPrinciple, investInterest, investTerm;
 	Button mortCalculate, investCalculate, clear;
 	TextView output_mortgage, output_repayment, outputFinalValue, mortOutputError, investOutputError;
-    @Override
+    /****************************************************************
+		FUNCTION:   void onCreate(Bundle)
+		ARGUMENTS:  saved instance state (Bundle)
+		RETURNS:    nothing
+		NOTES:      This is equivalent to main() in other programming languages.
+		            It sets up the EditTexts, Buttons, and TextViews.
+     ****************************************************************/
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
@@ -57,9 +81,7 @@ public class A3TabbedCalculatorActivity extends Activity {
         output_mortgage = (TextView) findViewById(R.id.monthly_payment_output);
         output_repayment = (TextView) findViewById(R.id.total_payment_output);
         mortOutputError = (TextView) findViewById(R.id.borrow_error);
-        investOutputError = (TextView) findViewById(R.id.interest_error);
-
-        
+        investOutputError = (TextView) findViewById(R.id.interest_error);        
     }
     
     /****************************************************************
@@ -172,7 +194,13 @@ public class A3TabbedCalculatorActivity extends Activity {
     	{
     		return principle * Math.pow((1 + annualInterestRate), numYears);
     	}
-    
+
+    /****************************************************************
+		FUNCTION:   void clearMortInputs(View)
+		ARGUMENTS:  button (View)
+		RETURNS:    nothing
+		NOTES:      This clears the input and output fields for the mortgage tab.
+     ****************************************************************/
     public void clearMortInputs(View theButton) {
     	//wipe it all clean
     	mortPrinciple.setText("");
@@ -186,6 +214,12 @@ public class A3TabbedCalculatorActivity extends Activity {
     	Log.d("A2_debug", "Cleared all the mortgage inputs.");
     }
 
+    /****************************************************************
+		FUNCTION:   void clearInvestInputs(View)
+		ARGUMENTS:  button (View)
+		RETURNS:    nothing
+		NOTES:      This clears the input and output fields for the investment tab.
+     ****************************************************************/
     public void clearInvestInputs(View theButton) {
     	//wipe it all clean
     	investPrinciple.setText("");
