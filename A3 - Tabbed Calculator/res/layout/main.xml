@@ -81,10 +81,13 @@
 		        	<TextView android:id="@+id/monthly_payment_output"/>
 		        </TableRow>
 		        <TableRow android:layout_height="wrap_content">
-		        	<TextView android:text="@string/total_payment" android:gravity="right"/>
+		        	<TextView android:text="@string/total_payment" 
+		        			android:gravity="right"/>
 		        	<TextView android:id="@+id/total_payment_output"/>
 		        </TableRow>
-		        <TextView android:id="@+id/borrow_error" android:layout_height="wrap_content" android:layout_width="fill_parent"/>
+		        <TextView android:id="@+id/borrow_error" 
+		        		android:layout_height="wrap_content" 
+		        		android:layout_width="fill_parent"/>
 			</TableLayout>
 			
 			<!-- Tab #2 - Invest -->
@@ -138,21 +141,30 @@
 		            <Button android:text="@string/clear" 
 			            android:id="@+id/clear_button_invest" 
 			            android:layout_width="wrap_content" 
-			            android:layout_height="wrap_content"/>
+			            android:layout_height="wrap_content"
+			            android:onClick="clearInvestInputs"/>
 		            <Button android:text="@string/calculate" 
 			            android:id="@+id/calculate_button_invest" 
 			            android:layout_width="wrap_content" 
-			            android:layout_height="wrap_content"/>
+			            android:layout_height="wrap_content"
+			            android:onClick="calculateInvestment"/>
 		        </TableRow>
 		        <View android:layout_width="fill_parent"
 		        	android:layout_height="2dip"
 		        	android:background="#FF00FF00"/>
 		        <TableRow android:layout_height="wrap_content">
 		        	<!-- Output areas here -->
-		            <TextView android:text="@string/final_value" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="right"/>
-		            <TextView android:id="@+id/final_value_ouput" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		            <TextView android:text="@string/final_value" 
+		            		android:layout_width="wrap_content" 
+		            		android:layout_height="wrap_content" 
+		            		android:gravity="right"/>
+		            <TextView android:id="@+id/final_value_ouput" 
+		            		android:layout_width="wrap_content" 
+		            		android:layout_height="wrap_content"/>
 		        </TableRow>
-		        <TextView android:id="@+id/interest_error" android:layout_height="wrap_content" android:layout_width="fill_parent"/>
+		        <TextView android:id="@+id/interest_error" 
+		        		android:layout_height="wrap_content" 
+		        		android:layout_width="fill_parent"/>
 			</TableLayout>
 		</FrameLayout>
 	</LinearLayout>

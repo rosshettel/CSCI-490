@@ -16,9 +16,10 @@ import android.widget.TextView;
 
 public class A3TabbedCalculatorActivity extends Activity {
     /** Called when the activity is first created. */
-	EditText mortPrinciple, mortInterest, mortTerm;
-	Button mortCalculate, clear;
-	TextView output_mortgage, output_repayment, mortOutputError;
+	EditText mortPrinciple, mortInterest, mortTerm, 
+			investPrinciple, investInterest, investTerm;
+	Button mortCalculate, investCalculate, clear;
+	TextView output_mortgage, output_repayment, outputFinalValue, mortOutputError, investOutputError;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +47,17 @@ public class A3TabbedCalculatorActivity extends Activity {
         
         mortCalculate = (Button) findViewById(R.id.calculate_button_borrow);
         
+        investPrinciple = (EditText) findViewById(R.id.amount_invest_input);
+        investInterest = (EditText) findViewById(R.id.rate_invest_input);
+        investTerm = (EditText) findViewById(R.id.time_invest_input);
+        
+        investCalculate = (Button) findViewById(R.id.calculate_button_invest);
+        
+        outputFinalValue = (TextView) findViewById(R.id.final_value_ouput);
         output_mortgage = (TextView) findViewById(R.id.monthly_payment_output);
         output_repayment = (TextView) findViewById(R.id.total_payment_output);
         mortOutputError = (TextView) findViewById(R.id.borrow_error);
+        investOutputError = (TextView) findViewById(R.id.interest_error);
 
         
     }
@@ -66,7 +75,6 @@ public class A3TabbedCalculatorActivity extends Activity {
     	double monthlyResult, repaymentResult, interestPercent;
     	int term_num = 0;
         DecimalFormat df = new DecimalFormat("#.00");
-        Log.d("A2_debug", "got to calcMortgage function");
         mortOutputError.setText(""); //reset the error messages
         
         //try to convert the user input to doubles/int, error if exception found
@@ -76,7 +84,7 @@ public class A3TabbedCalculatorActivity extends Activity {
     		interestPercent = interest_num / 100; //turn the whole into a decimal percentage
     		term_num = Integer.parseInt(mortTerm.getText().toString());
     	} catch (final NumberFormatException e) {
-    		Log.d("A2_debug", "Encountered an error parsing user input.");
+    		Log.d("A2_debug", "Encountered an error parsing user input in mortgage.");
     		// let the user know the input is wrong
     		mortOutputError.setText("Warning - Input error, make sure you entered a valid value in each field above.");
         	//reset the output dialog as well
@@ -92,6 +100,43 @@ public class A3TabbedCalculatorActivity extends Activity {
     	//convert results to decimal format and output
     	output_mortgage.setText(df.format(monthlyResult)); 
     	output_repayment.setText(df.format(repaymentResult));
+    }
+
+    /****************************************************************
+		FUNCTION:   void calculateInvestment(View theButton)
+		ARGUMENTS:  view
+		RETURNS:    none
+		NOTES:      Get all the user inputs, convert to respective data types,
+					then calculate the final value and output.
+     ****************************************************************/
+    public void calculateInvestment(View theButton) {
+    	double principle_num = 0;
+    	double interest_num = 0;
+    	double finalValue, interestPercent;
+    	int term_num = 0;
+        DecimalFormat df = new DecimalFormat("#.00");
+        investOutputError.setText(""); //reset the error messages
+        
+        //try to convert the user input to doubles/int, error if exception found
+    	try {
+    		principle_num = Double.parseDouble(investPrinciple.getText().toString());
+    		interest_num = Double.parseDouble(investInterest.getText().toString());
+    		interestPercent = interest_num / 100; //turn the whole into a decimal percentage
+    		term_num = Integer.parseInt(investTerm.getText().toString());
+    	} catch (final NumberFormatException e) {
+    		Log.d("A2_debug", "Encountered an error parsing user input in investment.");
+    		// let the user know the input is wrong
+    		investOutputError.setText("Warning - Input error, make sure you entered a valid value in each field above.");
+        	//reset the output dialog as well
+        	outputFinalValue.setText("");
+    		return; //get outta here johnny!
+    	}
+    	
+    	//calculate final value 
+    	finalValue = calculateFinalValue(principle_num, interestPercent, term_num);
+  
+    	//convert results to decimal format and output
+    	outputFinalValue.setText(df.format(finalValue)); 
     }
     
     /****************************************************************
@@ -141,4 +186,15 @@ public class A3TabbedCalculatorActivity extends Activity {
     	Log.d("A2_debug", "Cleared all the mortgage inputs.");
     }
 
+    public void clearInvestInputs(View theButton) {
+    	//wipe it all clean
+    	investPrinciple.setText("");
+    	investInterest.setText("");
+    	investTerm.setText("");
+    	
+    	//reset all the output dialog as well
+    	outputFinalValue.setText("");
+		
+    	Log.d("A2_debug", "Cleared all the investment inputs.");
+    }
 }
