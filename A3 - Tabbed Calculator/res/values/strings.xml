@@ -13,7 +13,7 @@
     <!-- Borrow Tab -->
     <string name="borrow_tab">Borrow</string>
     <string name="amount_borrow_hint">Enter loan amount</string>
-    <string name="month_payment">Monthly Payment:</string>
+    <string name="monthly_payment">Monthly Payment:</string>
     <string name="total_payment">Total Payment:</string>
     
     <!-- Invest Tab -->
