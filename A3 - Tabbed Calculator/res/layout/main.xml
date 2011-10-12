@@ -1,4 +1,10 @@
+<!--    PROGRAM:   Assignment 3, main.xml file
+       AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+       LOGON ID:  Z1549355, Z159807, Z1624450
+       DUE DATE:  10/12 at class time -->
+
 <?xml version="1.0" encoding="utf-8"?>
+<!-- TabHost for creating a tabbed layout -->
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
@@ -7,9 +13,11 @@
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent">
+	    <!-- Tab widget where the tab selectors will go -->
 	    <TabWidget android:id="@android:id/tabs"
 	    	android:layout_width="fill_parent"
 	    	android:layout_height="wrap_content"/>
+	    	<!-- Frame Layout where the content for the tabs will go -->
 		<FrameLayout android:id="@android:id/tabcontent"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
@@ -19,7 +27,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:stretchColumns="1">
-				<TableRow android:layout_height="wrap_content">
+			<!-- amount row -->
+			<TableRow android:layout_height="wrap_content">
 		            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
 			            android:text="@string/amount" 
 			            android:layout_height="wrap_content" 
@@ -32,6 +41,7 @@
 			            android:layout_marginRight="20dip"
 			            android:hint="@string/amount_borrow_hint"/>
 		        </TableRow>
+		        <!-- rate row -->
 		        <TableRow android:layout_height="wrap_content">
 		            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
 			            android:text="@string/rate" 
@@ -47,6 +57,7 @@
 			            android:hint="@string/rate_hint">
 		            </EditText>
 		        </TableRow>
+		        <!-- time row -->
 		        <TableRow android:layout_height="wrap_content">
 		            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
 			            android:text="@string/time" 
@@ -61,6 +72,7 @@
 			            android:layout_marginRight="20dip"
 			            android:hint="@string/time_hint"/>
 		        </TableRow>
+		        <!-- button row -->
 		        <TableRow android:layout_height="wrap_content">
 		            <Button android:text="@string/clear" 
 			            android:id="@+id/clear_button_borrow" 
@@ -73,9 +85,11 @@
 			            android:layout_height="wrap_content" 
 			            android:onClick="calculateMortgage"/>
 		        </TableRow>
+		        <!-- horizontal line to break things up -->
 		        <View android:layout_width="fill_parent"
 		        	android:layout_height="2dip"
 		        	android:background="#FF00FF00"/>
+		        <!-- output and error textviews -->
 		        <TableRow android:layout_height="wrap_content">
 		        	<TextView android:text="@string/monthly_payment"/>
 		        	<TextView android:id="@+id/monthly_payment_output"/>
@@ -95,7 +109,8 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:stretchColumns="1">
-				<TableRow android:layout_height="wrap_content">
+			<!-- amount row -->
+			<TableRow android:layout_height="wrap_content">
 		            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
 			            android:text="@string/amount" 
 			            android:layout_height="wrap_content"
@@ -108,6 +123,7 @@
 			            android:layout_marginRight="20dip"
 			            android:hint="@string/amount_invest_hint"/>
 		        </TableRow>
+		        <!-- rate row -->
 		        <TableRow android:layout_height="wrap_content">
 		            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
 			            android:text="@string/rate" 
@@ -123,6 +139,7 @@
 			            android:hint="@string/rate_hint">
 		            </EditText>
 		        </TableRow>
+		        <!-- time row -->
 		        <TableRow android:layout_height="wrap_content">
 		            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
 			            android:text="@string/time" 
@@ -137,6 +154,7 @@
 			            android:layout_marginRight="20dip"
 			            android:hint="@string/time_hint"/>
 		        </TableRow>
+		        <!-- button row -->
 		        <TableRow android:layout_height="wrap_content">
 		            <Button android:text="@string/clear" 
 			            android:id="@+id/clear_button_invest" 
@@ -149,11 +167,12 @@
 			            android:layout_height="wrap_content"
 			            android:onClick="calculateInvestment"/>
 		        </TableRow>
+		        <!-- horizontal line to break things up -->
 		        <View android:layout_width="fill_parent"
 		        	android:layout_height="2dip"
 		        	android:background="#FF00FF00"/>
+		        <!-- output and error textviews -->
 		        <TableRow android:layout_height="wrap_content">
-		        	<!-- Output areas here -->
 		            <TextView android:text="@string/final_value" 
 		            		android:layout_width="wrap_content" 
 		            		android:layout_height="wrap_content" 
