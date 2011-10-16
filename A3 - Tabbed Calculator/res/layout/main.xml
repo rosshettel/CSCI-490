@@ -1,9 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--    PROGRAM:   Assignment 3, main.xml file
        AUTHOR:    Ross Hettel, John Miller, Alex Wohead
        LOGON ID:  Z1549355, Z159807, Z1624450
        DUE DATE:  10/12 at class time -->
 
-<?xml version="1.0" encoding="utf-8"?>
 <!-- TabHost for creating a tabbed layout -->
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
