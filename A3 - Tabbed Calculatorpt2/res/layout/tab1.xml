@@ -65,8 +65,7 @@
 		            <Button android:text="@string/calculate" 
 			            android:id="@+id/calculate_button_borrow" 
 			            android:layout_width="wrap_content" 
-			            android:layout_height="wrap_content" 
-			            android:onClick="calculateMortgage"/>
+			            android:layout_height="wrap_content" />
 		        </TableRow>
 		        <!-- horizontal line to break things up -->
 		        <View android:layout_width="fill_parent"

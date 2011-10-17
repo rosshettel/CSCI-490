@@ -2,12 +2,29 @@ package edu.niu.cs.rosshettel.Assignment3;
 
 import java.text.DecimalFormat;
 
+import android.content.DialogInterface.OnClickListener;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
-public class Mortgage extends A3TabbedCalculatorActivity
+public class Mortgage extends A3TabbedCalculatorActivity implements OnClickListener
 {
-    /****************************************************************
+    
+    public void onCreate(Bundle savedInstanceState) 
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        Button mortCalculateButton = (Button)findViewById(R.id.calculate_button_borrow);
+        mortCalculateButton.setOnClickListener(this);
+    }
+
+	@Override
+    public void onClick(View v)
+	{
+		calculateMortgage(v);
+	}
+	/****************************************************************
 		FUNCTION:   void calculateMortgage(View theButton)
 		ARGUMENTS:  view
 		RETURNS:    none
@@ -92,4 +109,5 @@ public class Mortgage extends A3TabbedCalculatorActivity
 		
     	Log.d("A2_debug", "Cleared all the mortgage inputs.");
     }
+
 }
