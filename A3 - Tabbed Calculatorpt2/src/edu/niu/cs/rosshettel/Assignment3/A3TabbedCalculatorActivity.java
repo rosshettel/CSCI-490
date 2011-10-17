@@ -1,5 +1,5 @@
 /****************************************************************
-   PROGRAM:   Assignment 3
+   PROGRAM:   Assignment 3 part 2
    AUTHOR:    Ross Hettel, John Miller, Alex Wohead
    LOGON ID:  Z1549355, Z159807, Z1624450
    DUE DATE:  10/12 at class time

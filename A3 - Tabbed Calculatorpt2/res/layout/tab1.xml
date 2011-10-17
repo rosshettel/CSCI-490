@@ -5,74 +5,85 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-	<TableLayout android:id="@+id/tab1"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:stretchColumns="1">
-		<TableRow android:layout_height="wrap_content">
-            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
-	            android:text="@string/amount" 
-	            android:layout_height="wrap_content" 
-	            android:layout_width="wrap_content" android:gravity="right"/>
-            <EditText android:inputType="numberDecimal" 
-	            android:id="@+id/amount_borrow_input" 
-	            android:layout_height="wrap_content" 
-	            android:layout_width="wrap_content" 
-	            android:layout_marginLeft="30dip" 
-	            android:layout_marginRight="20dip"
-	            android:hint="@string/amount_borrow_hint"/>
-        </TableRow>
-        <TableRow android:layout_height="wrap_content">
-            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
-	            android:text="@string/rate" 
-	            android:layout_height="wrap_content" 
-	            android:layout_width="wrap_content" 
-	            android:gravity="right|fill_vertical"/>
-            <EditText android:inputType="numberDecimal" 
-	            android:id="@+id/rate_borrow_input" 
-	            android:layout_height="wrap_content" 
-	            android:layout_width="wrap_content" 
-	            android:layout_marginLeft="30dip" 
-	            android:layout_marginRight="20dip"
-	            android:hint="@string/rate_hint">
-            </EditText>
-        </TableRow>
-        <TableRow android:layout_height="wrap_content">
-            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
-	            android:text="@string/time" 
-	            android:layout_height="wrap_content" 
-	            android:layout_width="wrap_content" 
-	            android:gravity="right|fill_vertical"/>
-            <EditText android:inputType="numberDecimal" 
-	            android:id="@+id/time_borrow_input" 
-	            android:layout_height="wrap_content" 
-	            android:layout_width="wrap_content" 
-	            android:layout_marginLeft="30dip" 
-	            android:layout_marginRight="20dip"
-	            android:hint="@string/time_hint"/>
-        </TableRow>
-        <TableRow android:layout_height="wrap_content">
-            <Button android:text="@string/clear" 
-	            android:id="@+id/clear_button_borrow" 
-	            android:layout_width="wrap_content" 
-	            android:layout_height="wrap_content"/>
-            <Button android:text="@string/calculate" 
-	            android:id="@+id/calculate_button_borrow" 
-	            android:layout_width="wrap_content" 
-	            android:layout_height="wrap_content" 
-	            android:onClick="calculateMortgage"/>
-        </TableRow>
-        <View android:layout_width="fill_parent"
-        	android:layout_height="2dip"
-        	android:background="#FF00FF00"/>
-        <TableRow android:layout_height="wrap_content">
-        	<TextView android:text="@string/monthly_payment"/>
-        	<TextView android:id="@+id/monthly_payment_output"/>
-        </TableRow>
-        <TableRow android:layout_height="wrap_content">
-        	<TextView android:text="@string/total_payment" android:gravity="right"/>
-        	<TextView android:id="@+id/total_payment_output"/>
-        </TableRow>
-        <TextView android:id="@+id/borrow_error" android:layout_height="wrap_content" android:layout_width="fill_parent"/>
-	</TableLayout>
+			<!-- Tab #1 - Borrow -->
+			<TableLayout android:id="@+id/tab1"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:stretchColumns="1">
+			<!-- amount row -->
+			<TableRow android:layout_height="wrap_content">
+		            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
+			            android:text="@string/amount" 
+			            android:layout_height="wrap_content" 
+			            android:layout_width="wrap_content" android:gravity="right"/>
+		            <EditText android:inputType="numberDecimal" 
+			            android:id="@+id/amount_borrow_input" 
+			            android:layout_height="wrap_content" 
+			            android:layout_width="wrap_content" 
+			            android:layout_marginLeft="30dip" 
+			            android:layout_marginRight="20dip"
+			            android:hint="@string/amount_borrow_hint"/>
+		        </TableRow>
+		        <!-- rate row -->
+		        <TableRow android:layout_height="wrap_content">
+		            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
+			            android:text="@string/rate" 
+			            android:layout_height="wrap_content" 
+			            android:layout_width="wrap_content" 
+			            android:gravity="right|fill_vertical"/>
+		            <EditText android:inputType="numberDecimal" 
+			            android:id="@+id/rate_borrow_input" 
+			            android:layout_height="wrap_content" 
+			            android:layout_width="wrap_content" 
+			            android:layout_marginLeft="30dip" 
+			            android:layout_marginRight="20dip"
+			            android:hint="@string/rate_hint">
+		            </EditText>
+		        </TableRow>
+		        <!-- time row -->
+		        <TableRow android:layout_height="wrap_content">
+		            <TextView android:textAppearance="?android:attr/textAppearanceLarge" 
+			            android:text="@string/time" 
+			            android:layout_height="wrap_content" 
+			            android:layout_width="wrap_content" 
+			            android:gravity="right|fill_vertical"/>
+		            <EditText android:inputType="numberDecimal" 
+			            android:id="@+id/time_borrow_input" 
+			            android:layout_height="wrap_content" 
+			            android:layout_width="wrap_content" 
+			            android:layout_marginLeft="30dip" 
+			            android:layout_marginRight="20dip"
+			            android:hint="@string/time_hint"/>
+		        </TableRow>
+		        <!-- button row -->
+		        <TableRow android:layout_height="wrap_content">
+		            <Button android:text="@string/clear" 
+			            android:id="@+id/clear_button_borrow" 
+			            android:layout_width="wrap_content" 
+			            android:layout_height="wrap_content" 
+			            android:onClick="clearMortInputs"/>
+		            <Button android:text="@string/calculate" 
+			            android:id="@+id/calculate_button_borrow" 
+			            android:layout_width="wrap_content" 
+			            android:layout_height="wrap_content" 
+			            android:onClick="calculateMortgage"/>
+		        </TableRow>
+		        <!-- horizontal line to break things up -->
+		        <View android:layout_width="fill_parent"
+		        	android:layout_height="2dip"
+		        	android:background="#FF00FF00"/>
+		        <!-- output and error textviews -->
+		        <TableRow android:layout_height="wrap_content">
+		        	<TextView android:text="@string/monthly_payment"/>
+		        	<TextView android:id="@+id/monthly_payment_output"/>
+		        </TableRow>
+		        <TableRow android:layout_height="wrap_content">
+		        	<TextView android:text="@string/total_payment" 
+		        			android:gravity="right"/>
+		        	<TextView android:id="@+id/total_payment_output"/>
+		        </TableRow>
+		        <TextView android:id="@+id/borrow_error" 
+		        		android:layout_height="wrap_content" 
+		        		android:layout_width="fill_parent"/>
+			</TableLayout>
 </LinearLayout>

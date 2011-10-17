@@ -25,12 +25,12 @@ public final class R {
         public static final int clear_button_invest=0x7f05000e;
         public static final int final_value_ouput=0x7f050010;
         public static final int interest_error=0x7f050011;
+        public static final int mainLayout=0x7f050000;
         public static final int monthly_payment_output=0x7f050007;
         public static final int rate_borrow_input=0x7f050003;
         public static final int rate_invest_input=0x7f05000c;
         public static final int tab1=0x7f050001;
         public static final int tab2=0x7f05000a;
-        public static final int tabhost=0x7f050000;
         public static final int time_borrow_input=0x7f050004;
         public static final int time_invest_input=0x7f05000d;
         public static final int total_payment_output=0x7f050008;
