@@ -21,7 +21,7 @@ import java.text.DecimalFormat;
 
 import edu.niu.cs.rosshettel.Assignment3.R;
 
-import android.app.Activity;
+import android.app.TabActivity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,7 +31,7 @@ import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-public class A3TabbedCalculatorActivity extends Activity {
+public class A3TabbedCalculatorActivity extends TabActivity {
     /** Called when the activity is first created. */
 	EditText mortPrinciple, mortInterest, mortTerm, 
 			investPrinciple, investInterest, investTerm;
@@ -50,8 +50,7 @@ public class A3TabbedCalculatorActivity extends Activity {
         setContentView(R.layout.main);
         
         Resources res = getResources();
-        TabHost pgmTabs = (TabHost)findViewById(R.id.tabhost);
-        pgmTabs.setup();
+        TabHost pgmTabs = getTabHost();
         TabHost.TabSpec spec = pgmTabs.newTabSpec("tag1");
         
         /*  */
