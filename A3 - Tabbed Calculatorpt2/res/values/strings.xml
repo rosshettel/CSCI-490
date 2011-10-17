@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--    PROGRAM:   Assignment 3, strings.xml file
+        AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+        LOGON ID:  Z1549355, Z159807, Z1624450
+        DUE DATE:  10/12 at class time -->
+<resources>
+    <string name="hello">Hello World, A3TabbedCalculatorActivity!</string>
+    <string name="app_name">A3 - Tabbed Calculator</string>
+    
+    <!-- Common Text -->
+    <string name="amount">Amount:</string>
+    <string name="rate">Rate:</string>
+    <string name="rate_hint">Enter interest rate</string>
+    <string name="time">Time:</string>
+    <string name="time_hint">Enter time in years</string>
+    
+    <!-- Borrow Tab -->
+    <string name="borrow_tab">Borrow</string>
+    <string name="amount_borrow_hint">Enter loan amount</string>
+    <string name="monthly_payment">Monthly Payment:</string>
+    <string name="total_payment">Total Payment:</string>
+    
+    <!-- Invest Tab -->
+    <string name="invest_tab">Invest</string>
+    <string name="amount_invest_hint">Enter amount to invest</string>
+    <string name="final_value">Final Value:</string>
+    
+    <!-- Buttons -->
+    <string name="calculate">Calculate</string>
+    <string name="clear">Clear</string>
+    
+</resources>
