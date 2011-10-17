@@ -13,6 +13,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="Investment"></activity>
+        <activity android:name="Mortgage"></activity>
 
     </application>
 </manifest>
