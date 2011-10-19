@@ -1,3 +1,12 @@
+/****************************************************************
+   FILE:      Investment.java
+   AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+   LOGON ID:  Z1549355, Z159807, Z1624450
+   DUE DATE:  10/17 at class time
+
+   PURPOSE:   This will set up the Investment tab as well as process any
+              input entered here.
+****************************************************************/
 package edu.niu.cs.rosshettel.Assignment3;
 
 import java.text.DecimalFormat;
@@ -31,7 +40,8 @@ public class Investment extends A3TabbedCalculatorActivity
     	} catch (final NumberFormatException e) {
     		Log.d("A2_debug", "Encountered an error parsing user input in investment.");
     		// let the user know the input is wrong
-    		investOutputError.setText("Warning - Input error, make sure you entered a valid value in each field above.");
+    		investOutputError.setText("Warning - Input error, make sure you entered a " +
+    				"valid value in each field above.");
         	//reset the output dialog as well
         	outputFinalValue.setText("");
     		return; //get outta here johnny!

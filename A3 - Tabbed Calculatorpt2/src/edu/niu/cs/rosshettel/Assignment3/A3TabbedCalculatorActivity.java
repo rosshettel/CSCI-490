@@ -2,7 +2,7 @@
    PROGRAM:   Assignment 3 part 2
    AUTHOR:    Ross Hettel, John Miller, Alex Wohead
    LOGON ID:  Z1549355, Z159807, Z1624450
-   DUE DATE:  10/12 at class time
+   DUE DATE:  10/17 at class time
 
    FUNCTION:  This is a mortgage and investment calculator.  It will calculate
     		  your monthly payment and the total amount to be repaid for a 
@@ -28,7 +28,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 public class A3TabbedCalculatorActivity extends TabActivity {
-    /** Called when the activity is first created. */
+    //Here are our initializations for buttons and text fields.
 	EditText mortPrinciple, mortInterest, mortTerm, 
 			investPrinciple, investInterest, investTerm;
 	Button mortCalculate, investCalculate, clear;
@@ -36,6 +36,7 @@ public class A3TabbedCalculatorActivity extends TabActivity {
 	
 	static String debug_tag = "A3pt2_Debug" ;
 	
+	//Here we were trying to see if declaring a member of each class would help.
 	//Mortgage mortgage = new Mortgage();
 	//Investment testInvestment = new Investment();
     /****************************************************************
@@ -50,22 +51,24 @@ public class A3TabbedCalculatorActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        //Set up tabhost.
         Resources res = getResources();
         TabHost pgmTabs = getTabHost();
         TabHost.TabSpec spec = pgmTabs.newTabSpec("tag1");
         Intent intent;
         
-        Log.d(debug_tag, "in the oncreate");
+        Log.d(debug_tag, "in the main oncreate");
         
         /*  */
-        //Mortgage Tab
+        //Add Mortgage Tab
         intent = new Intent().setClass(this, MortgageActivity.class);
         spec = pgmTabs.newTabSpec("mortgage").
         	setIndicator(res.getText(R.string.borrow_tab),res.getDrawable(R.drawable.tab_borrow)).
         	setContent(intent);
         pgmTabs.addTab(spec);
         
-        
+        //This would be the part where we add the investment tab, but we were trying
+        //to get one thing working at a time.
 //        spec.setContent(R.id.tab1);
 //        spec.setIndicator(res.getText(R.string.borrow_tab),	res.getDrawable(R.drawable.tab_borrow));
 //        pgmTabs.addTab(spec);
@@ -76,6 +79,7 @@ public class A3TabbedCalculatorActivity extends TabActivity {
         spec.setIndicator(res.getText(R.string.invest_tab), res.getDrawable(R.drawable.tab_invest));
         pgmTabs.addTab(spec);
 
+        //This section links all of the buttons, EditTexts, and TextViews to the XML.
         mortPrinciple = (EditText) findViewById(R.id.amount_borrow_input);
         mortInterest = (EditText) findViewById(R.id.rate_borrow_input);
         mortTerm = (EditText) findViewById(R.id.time_borrow_input);
@@ -94,6 +98,7 @@ public class A3TabbedCalculatorActivity extends TabActivity {
         mortOutputError = (TextView) findViewById(R.id.borrow_error);
         investOutputError = (TextView) findViewById(R.id.interest_error);   
         
-//        mortCalculate.setOnClickListener(Mortgage.computeListener);
+        //We tried having the onclick listener here, but it didn't work.
+//        mortCalculate.setOnClickListener(MortgageActivity.computeListener);
     }
 }
