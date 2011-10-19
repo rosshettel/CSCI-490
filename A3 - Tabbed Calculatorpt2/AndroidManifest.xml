@@ -14,7 +14,7 @@
             </intent-filter>
         </activity>
         <activity android:name="Investment"></activity>
-        <activity android:name="Mortgage"></activity>
+        <activity android:name="MortgageActivity"></activity>
 
     </application>
 </manifest>

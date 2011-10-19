@@ -17,12 +17,11 @@
 ****************************************************************/
 package edu.niu.cs.rosshettel.Assignment3;
 
-import edu.niu.cs.rosshettel.Assignment3.R;
-
 import android.app.TabActivity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TabHost;
@@ -34,6 +33,9 @@ public class A3TabbedCalculatorActivity extends TabActivity {
 			investPrinciple, investInterest, investTerm;
 	Button mortCalculate, investCalculate, clear;
 	TextView output_mortgage, output_repayment, outputFinalValue, mortOutputError, investOutputError;
+	
+	static String debug_tag = "A3pt2_Debug" ;
+	
 	//Mortgage mortgage = new Mortgage();
 	//Investment testInvestment = new Investment();
     /****************************************************************
@@ -51,11 +53,22 @@ public class A3TabbedCalculatorActivity extends TabActivity {
         Resources res = getResources();
         TabHost pgmTabs = getTabHost();
         TabHost.TabSpec spec = pgmTabs.newTabSpec("tag1");
+        Intent intent;
+        
+        Log.d(debug_tag, "in the oncreate");
         
         /*  */
-        spec.setContent(R.id.tab1);
-        spec.setIndicator(res.getText(R.string.borrow_tab),	res.getDrawable(R.drawable.tab_borrow));
+        //Mortgage Tab
+        intent = new Intent().setClass(this, MortgageActivity.class);
+        spec = pgmTabs.newTabSpec("mortgage").
+        	setIndicator(res.getText(R.string.borrow_tab),res.getDrawable(R.drawable.tab_borrow)).
+        	setContent(intent);
         pgmTabs.addTab(spec);
+        
+        
+//        spec.setContent(R.id.tab1);
+//        spec.setIndicator(res.getText(R.string.borrow_tab),	res.getDrawable(R.drawable.tab_borrow));
+//        pgmTabs.addTab(spec);
         
         spec = pgmTabs.newTabSpec("tag2");
         
@@ -79,6 +92,8 @@ public class A3TabbedCalculatorActivity extends TabActivity {
         output_mortgage = (TextView) findViewById(R.id.monthly_payment_output);
         output_repayment = (TextView) findViewById(R.id.total_payment_output);
         mortOutputError = (TextView) findViewById(R.id.borrow_error);
-        investOutputError = (TextView) findViewById(R.id.interest_error);        
+        investOutputError = (TextView) findViewById(R.id.interest_error);   
+        
+//        mortCalculate.setOnClickListener(Mortgage.computeListener);
     }
 }
