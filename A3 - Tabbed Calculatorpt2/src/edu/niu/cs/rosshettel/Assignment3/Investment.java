@@ -10,7 +10,6 @@
 package edu.niu.cs.rosshettel.Assignment3;
 
 import java.text.DecimalFormat;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,25 +20,40 @@ import android.widget.TextView;
 
 public class Investment extends Activity
 {
-	EditText investPrinciple, investInterest, investTerm;
+	
+    //widgets for the investment calcuator	
+    EditText investPrinciple, investInterest, investTerm;
     Button investCalculate, clear;
     TextView outputFinalValue, investOutputError;
 	
+	/****************************************************************
+		FUNCTION:   void onCreate(Bundle)
+		ARGUMENTS:  saved instance state (Bundle)
+		RETURNS:    nothing
+		NOTES:      This is equivalent to main() in other programming languages.
+		            This method sets the widgets to their id's
+		            Then it will setOnClickListeners on the 
+		            calculate button and the clear button.
+     ****************************************************************/
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab2);
-		
-		investPrinciple = (EditText) findViewById(R.id.amount_invest_input);
+	
+	//text fields for input
+	investPrinciple = (EditText) findViewById(R.id.amount_invest_input);
         investInterest = (EditText) findViewById(R.id.rate_invest_input);
         investTerm = (EditText) findViewById(R.id.time_invest_input);
         
+        //calculate and clear button for clearing and calculating
         investCalculate = (Button) findViewById(R.id.calculate_button_invest);
         clear = (Button) findViewById(R.id.clear_button_invest);
         
+        //output fields for the total and errors
         outputFinalValue = (TextView) findViewById(R.id.final_value_ouput);
         investOutputError = (TextView) findViewById(R.id.interest_error);
         
+        //setting an onClickListener for the calculate button
         investCalculate.setOnClickListener(new View.OnClickListener()
         {
         		public void onClick(View v)
@@ -47,6 +61,7 @@ public class Investment extends Activity
         				calculateInvestment(v);
         		}
         });
+        //setting an onClickListener for the clear button
         clear.setOnClickListener(new View.OnClickListener()
         {
         		public void onClick(View v)
