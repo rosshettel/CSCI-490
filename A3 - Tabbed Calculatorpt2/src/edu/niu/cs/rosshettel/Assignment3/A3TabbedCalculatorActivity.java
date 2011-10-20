@@ -21,10 +21,10 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 public class A3TabbedCalculatorActivity extends TabActivity {
@@ -33,9 +33,9 @@ public class A3TabbedCalculatorActivity extends TabActivity {
 			investPrinciple, investInterest, investTerm;
 	Button mortCalculate, investCalculate, clear;
 	TextView output_mortgage, output_repayment, outputFinalValue, mortOutputError, investOutputError;
-	
+
 	static String debug_tag = "A3pt2_Debug" ;
-	
+
 	//Here we were trying to see if declaring a member of each class would help.
 	//Mortgage mortgage = new Mortgage();
 	//Investment testInvestment = new Investment();
@@ -50,55 +50,23 @@ public class A3TabbedCalculatorActivity extends TabActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        Resources res = getResources();
         
         //Set up tabhost.
-        Resources res = getResources();
-        TabHost pgmTabs = getTabHost();
-        TabHost.TabSpec spec = pgmTabs.newTabSpec("tag1");
-        Intent intent;
+        TabHost pgmTabs = (TabHost)findViewById(android.R.id.tabhost);
         
-        Log.d(debug_tag, "in the main oncreate");
-        
-        /*  */
-        //Add Mortgage Tab
-        intent = new Intent().setClass(this, MortgageActivity.class);
-        spec = pgmTabs.newTabSpec("mortgage").
-        	setIndicator(res.getText(R.string.borrow_tab),res.getDrawable(R.drawable.tab_borrow)).
-        	setContent(intent);
-        pgmTabs.addTab(spec);
-        
-        //This would be the part where we add the investment tab, but we were trying
-        //to get one thing working at a time.
-//        spec.setContent(R.id.tab1);
-//        spec.setIndicator(res.getText(R.string.borrow_tab),	res.getDrawable(R.drawable.tab_borrow));
-//        pgmTabs.addTab(spec);
-        
-        spec = pgmTabs.newTabSpec("tag2");
-        
-        spec.setContent(R.id.tab2);
-        spec.setIndicator(res.getText(R.string.invest_tab), res.getDrawable(R.drawable.tab_invest));
-        pgmTabs.addTab(spec);
+        TabSpec spec1 = pgmTabs.newTabSpec("tag1");
+        spec1.setIndicator(res.getText(R.string.borrow_tab),res.getDrawable(R.drawable.tab_borrow));
+        Intent in1=new Intent(this, MortgageActivity.class);
+        spec1.setContent(in1);
 
-        //This section links all of the buttons, EditTexts, and TextViews to the XML.
-        mortPrinciple = (EditText) findViewById(R.id.amount_borrow_input);
-        mortInterest = (EditText) findViewById(R.id.rate_borrow_input);
-        mortTerm = (EditText) findViewById(R.id.time_borrow_input);
+        TabSpec spec2 = pgmTabs.newTabSpec("tag2");
+        spec2.setIndicator(res.getText(R.string.invest_tab), res.getDrawable(R.drawable.tab_invest));
+        Intent in2=new Intent(this, Investment.class);
+        spec2.setContent(in2);
         
-        mortCalculate = (Button) findViewById(R.id.calculate_button_borrow);
+        pgmTabs.addTab(spec1);
+        pgmTabs.addTab(spec2);
         
-        investPrinciple = (EditText) findViewById(R.id.amount_invest_input);
-        investInterest = (EditText) findViewById(R.id.rate_invest_input);
-        investTerm = (EditText) findViewById(R.id.time_invest_input);
-        
-        investCalculate = (Button) findViewById(R.id.calculate_button_invest);
-        
-        outputFinalValue = (TextView) findViewById(R.id.final_value_ouput);
-        output_mortgage = (TextView) findViewById(R.id.monthly_payment_output);
-        output_repayment = (TextView) findViewById(R.id.total_payment_output);
-        mortOutputError = (TextView) findViewById(R.id.borrow_error);
-        investOutputError = (TextView) findViewById(R.id.interest_error);   
-        
-        //We tried having the onclick listener here, but it didn't work.
-//        mortCalculate.setOnClickListener(MortgageActivity.computeListener);
     }
 }
