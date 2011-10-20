@@ -9,9 +9,7 @@
 ****************************************************************/
 package edu.niu.cs.rosshettel.Assignment3;
 
-//import android.app.Activity;
 import java.text.DecimalFormat;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,26 +20,40 @@ import android.widget.TextView;
 
 public class MortgageActivity extends Activity
 {
-	EditText mortPrinciple, mortInterest, mortTerm;
+    //widgets for the mortgage calculator	
+    EditText mortPrinciple, mortInterest, mortTerm;
     Button mortCalculate, clear;
     TextView output_mortgage, output_repayment, mortOutputError;
     
+    /****************************************************************
+		FUNCTION:   void onCreate(Bundle)
+		ARGUMENTS:  saved instance state (Bundle)
+		RETURNS:    nothing
+		NOTES:      This is equivalent to main() in other programming languages.
+		            This method sets the widgets to their id's
+		            Then it will setOnClickListeners on the 
+		            calculate button and the clear button.
+     ****************************************************************/
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab1);	
-		
-		mortPrinciple = (EditText) findViewById(R.id.amount_borrow_input);
+	
+	//edit texts for input
+	mortPrinciple = (EditText) findViewById(R.id.amount_borrow_input);
         mortInterest = (EditText) findViewById(R.id.rate_borrow_input);
         mortTerm = (EditText) findViewById(R.id.time_borrow_input);
         
+        //calculate and clear button for the calculations and clearing inputs
         mortCalculate = (Button) findViewById(R.id.calculate_button_borrow);
         clear = (Button) findViewById(R.id.clear_button_borrow);
         
+        //output fields for the totals and errors
         output_mortgage = (TextView) findViewById(R.id.monthly_payment_output);
         output_repayment = (TextView) findViewById(R.id.total_payment_output);
         mortOutputError = (TextView) findViewById(R.id.borrow_error);
         
+        //setting an onClickListener for the calculate button
         mortCalculate.setOnClickListener(new View.OnClickListener()
         {
         		public void onClick(View v)
@@ -49,6 +61,7 @@ public class MortgageActivity extends Activity
         				calculateMortgage(v);
         		}
         });
+        //setting an onClickListener for the clear button
         clear.setOnClickListener(new View.OnClickListener()
         {
         		public void onClick(View v)
