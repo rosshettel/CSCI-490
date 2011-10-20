@@ -11,11 +11,50 @@ package edu.niu.cs.rosshettel.Assignment3;
 
 import java.text.DecimalFormat;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-public class Investment extends A3TabbedCalculatorActivity
+public class Investment extends Activity
 {
+	EditText investPrinciple, investInterest, investTerm;
+    Button investCalculate, clear;
+    TextView outputFinalValue, investOutputError;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.tab2);
+		
+		investPrinciple = (EditText) findViewById(R.id.amount_invest_input);
+        investInterest = (EditText) findViewById(R.id.rate_invest_input);
+        investTerm = (EditText) findViewById(R.id.time_invest_input);
+        
+        investCalculate = (Button) findViewById(R.id.calculate_button_invest);
+        clear = (Button) findViewById(R.id.clear_button_borrow);
+        
+        outputFinalValue = (TextView) findViewById(R.id.final_value_ouput);
+        investOutputError = (TextView) findViewById(R.id.interest_error);
+        
+        investCalculate.setOnClickListener(new View.OnClickListener()
+        {
+        		public void onClick(View v)
+        		{
+        				calculateInvestment(v);
+        		}
+        });
+        clear.setOnClickListener(new View.OnClickListener()
+        {
+        		public void onClick(View v)
+        		{
+        				clearInvestInputs(v);
+        		}
+        });
+	}
     /****************************************************************
 		FUNCTION:   void calculateInvestment(View theButton)
 		ARGUMENTS:  view
@@ -53,7 +92,7 @@ public class Investment extends A3TabbedCalculatorActivity
     	//convert results to decimal format and output
     	outputFinalValue.setText(df.format(finalValue)); 
     }
-	
+
     /****************************************************************
 		FUNCTION:   double calculateFinalValue(double, double, int)
 		ARGUMENTS:  principle (double), annual interest rate (double), term in years (int)
@@ -64,7 +103,7 @@ public class Investment extends A3TabbedCalculatorActivity
     	{
     		return principle * Math.pow((1 + annualInterestRate), numYears);
     	}
-	
+
     /****************************************************************
 		FUNCTION:   void clearInvestInputs(View)
 		ARGUMENTS:  button (View)
@@ -82,7 +121,7 @@ public class Investment extends A3TabbedCalculatorActivity
     	
         investOutputError.setText(""); //reset the error messages
 
-		
+
     	Log.d("A2_debug", "Cleared all the investment inputs.");
     }
 }
