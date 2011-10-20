@@ -35,7 +35,7 @@ public class Investment extends Activity
         investTerm = (EditText) findViewById(R.id.time_invest_input);
         
         investCalculate = (Button) findViewById(R.id.calculate_button_invest);
-        clear = (Button) findViewById(R.id.clear_button_borrow);
+        clear = (Button) findViewById(R.id.clear_button_invest);
         
         outputFinalValue = (TextView) findViewById(R.id.final_value_ouput);
         investOutputError = (TextView) findViewById(R.id.interest_error);
