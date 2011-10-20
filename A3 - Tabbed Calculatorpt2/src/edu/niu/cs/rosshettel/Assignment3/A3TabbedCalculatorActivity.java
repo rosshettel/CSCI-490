@@ -28,23 +28,13 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 public class A3TabbedCalculatorActivity extends TabActivity {
-    //Here are our initializations for buttons and text fields.
-	EditText mortPrinciple, mortInterest, mortTerm, 
-			investPrinciple, investInterest, investTerm;
-	Button mortCalculate, investCalculate, clear;
-	TextView output_mortgage, output_repayment, outputFinalValue, mortOutputError, investOutputError;
 
-	static String debug_tag = "A3pt2_Debug" ;
-
-	//Here we were trying to see if declaring a member of each class would help.
-	//Mortgage mortgage = new Mortgage();
-	//Investment testInvestment = new Investment();
     /****************************************************************
 		FUNCTION:   void onCreate(Bundle)
 		ARGUMENTS:  saved instance state (Bundle)
 		RETURNS:    nothing
 		NOTES:      This is equivalent to main() in other programming languages.
-		            It sets up the EditTexts, Buttons, and TextViews.
+		            It sets up the tabs as the tab host.
      ****************************************************************/
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,16 +45,19 @@ public class A3TabbedCalculatorActivity extends TabActivity {
         //Set up tabhost.
         TabHost pgmTabs = (TabHost)findViewById(android.R.id.tabhost);
         
+        //create the first tab for borrowing
         TabSpec spec1 = pgmTabs.newTabSpec("tag1");
         spec1.setIndicator(res.getText(R.string.borrow_tab),res.getDrawable(R.drawable.tab_borrow));
         Intent in1=new Intent(this, MortgageActivity.class);
         spec1.setContent(in1);
 
+	//create second tab for investments
         TabSpec spec2 = pgmTabs.newTabSpec("tag2");
         spec2.setIndicator(res.getText(R.string.invest_tab), res.getDrawable(R.drawable.tab_invest));
         Intent in2=new Intent(this, Investment.class);
         spec2.setContent(in2);
         
+        //add both of the tabs to the tabhost
         pgmTabs.addTab(spec1);
         pgmTabs.addTab(spec2);
         
