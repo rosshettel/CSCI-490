@@ -12,51 +12,53 @@ package edu.niu.cs.rosshettel.Assignment3;
 //import android.app.Activity;
 import java.text.DecimalFormat;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-public class MortgageActivity extends A3TabbedCalculatorActivity 
+public class MortgageActivity extends Activity
 {
+	EditText mortPrinciple, mortInterest, mortTerm;
+    Button mortCalculate, clear;
+    TextView output_mortgage, output_repayment, mortOutputError;
     
-    public void onCreate(Bundle savedInstanceState) 
-    {
-    	Log.d("A3pt2_Debug", "We are in the mort on create");
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.tab1);
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.tab1);	
+		
+		mortPrinciple = (EditText) findViewById(R.id.amount_borrow_input);
+        mortInterest = (EditText) findViewById(R.id.rate_borrow_input);
+        mortTerm = (EditText) findViewById(R.id.time_borrow_input);
         
-        //This tries to set up the calculate button for this tab.  The clear button
-        //would also go here if this were to work.
-        Button mortCalculate = (Button)findViewById(R.id.calculate_button_borrow);
+        mortCalculate = (Button) findViewById(R.id.calculate_button_borrow);
+        clear = (Button) findViewById(R.id.clear_button_borrow);
         
-        //The last place we left this was setting the onclick listener here.
+        output_mortgage = (TextView) findViewById(R.id.monthly_payment_output);
+        output_repayment = (TextView) findViewById(R.id.total_payment_output);
+        mortOutputError = (TextView) findViewById(R.id.borrow_error);
+        
         mortCalculate.setOnClickListener(new View.OnClickListener()
         {
-        	public void onClick(View v)
-        	{
-        		calculateMortgage(v);
-        	}
+        		public void onClick(View v)
+        		{
+        				calculateMortgage(v);
+        		}
         });
-//        Button mortCalculateButton = (Button)findViewById(R.id.calculate_button_borrow);
-//        mortCalculate.setOnClickListener((android.view.View.OnClickListener) computeListener);
-        Log.d(debug_tag, "calc button id: " + mortCalculate.getId());
-//        mortCalculateButton.setOnClickListener((android.view.View.OnClickListener) computeListener);
+        clear.setOnClickListener(new View.OnClickListener()
+        {
+        		public void onClick(View v)
+        		{
+        				clearMortInputs(v);
+        		}
+        });
         
-    }
-
-    //We tried declaring the onclick listener separately here, but that didn't work.
-//	public OnClickListener computeListener = new OnClickListener() {
-//
-//		public void onClick(DialogInterface arg0, int arg1) {
-//			Log.d("A2_debug", "We are in the on click listener");
-//			
-//		}
-//		
-//		
-//	};
-    
-    
+        
+	}
 	/****************************************************************
 		FUNCTION:   void calculateMortgage(View theButton)
 		ARGUMENTS:  view
@@ -137,9 +139,9 @@ public class MortgageActivity extends A3TabbedCalculatorActivity
     	//reset all the output dialog as well
     	output_mortgage.setText("");
 		output_repayment.setText("");
-		
+
         mortOutputError.setText(""); //reset the error messages
-		
+
     	Log.d("A2_debug", "Cleared all the mortgage inputs.");
     }
 
