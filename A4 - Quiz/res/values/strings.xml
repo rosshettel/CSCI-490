@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title">Press Menu key to begin</string>
+    <string name="title">"iPod Trivia Quiz\nPress Menu key to begin"</string>
     <string name="app_name">A4 - Quiz</string>
-    <string name="quiz">Take The Quiz</string>
-    <string name="internet">Surf The Web</string>
+    <string name="quiz">Take Quiz</string>
+    <string name="study">Study</string>
     <string name="about">About</string>
 </resources>

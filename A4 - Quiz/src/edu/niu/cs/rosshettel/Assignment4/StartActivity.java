@@ -3,6 +3,7 @@ package edu.niu.cs.rosshettel.Assignment4;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.MenuInflater;
 import android.widget.Button;
 import android.widget.TextView;
 //test
@@ -17,11 +18,13 @@ public class StartActivity extends Activity {
         setContentView(R.layout.main);
         Resources res = getResources();
         
-        //make a label of this
-        title = (TextView) findViewById(R.id.title_message);
-        takeQuiz = (Button) findViewById(R.id.quiz_button);
-        surfWeb = (Button) findViewById(R.id.internet_button);
-        aboutButton = (Button) findViewById(R.id.about_button);
-        
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu passedMenu)
+    {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.menu, passedMenu);
+    	return true;
     }
 }

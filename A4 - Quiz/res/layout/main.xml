@@ -11,29 +11,7 @@
     android:layout_width="match_parent" 
     android:layout_weight="0.46" 
     android:capitalize="characters" 
-    android:textSize="25dip"
+    android:textSize="25sp"
     android:id="@+id/title_message">
     </TextView>
-    <TableLayout android:id="@+id/tableLayout1" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="0.46">
-        <TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content" android:layout_height="wrap_content">
-        <Button 
-        android:text="@string/quiz" 
-        android:id="@+id/quiz_button" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content">
-        </Button>
-        <Button 
-        android:text="@string/internet" 
-        android:id="@+id/internet_button" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content">
-        </Button>
-        <Button 
-        android:text="@string/about" 
-        android:id="@+id/about_button" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content">
-        </Button>
-        </TableRow>
-    </TableLayout>
 </LinearLayout>
