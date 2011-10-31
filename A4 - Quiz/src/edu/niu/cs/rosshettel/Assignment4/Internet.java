@@ -14,7 +14,7 @@ public class Internet extends Activity {
         setContentView(R.layout.internet);
         bowser=(WebView)findViewById(R.id.webkit);
         
-        bowser.loadUrl("http://en.wikipedia.org/wiki/IPod");
+        bowser.loadUrl("http://en.wikipedia.org/w/index.php?title=IPod&useformat=mobile");
         
     }
 }
