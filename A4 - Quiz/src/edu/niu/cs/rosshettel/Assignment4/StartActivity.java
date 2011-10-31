@@ -1,6 +1,7 @@
 package edu.niu.cs.rosshettel.Assignment4;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,8 +40,8 @@ public class StartActivity extends Activity {
     		Log.d("A4_debug", "About selected");
     		return true;
     	case R.id.study:
-    		Log.d("A4_debug", "Study selected");
-    		return true;
+    		Intent studyTime = new Intent(this, Internet.class);
+    		startActivity(studyTime);
     	case R.id.take_quiz:
     		Log.d("A4_debug", "Take quiz selected");
     		return true;
