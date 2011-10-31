@@ -15,6 +15,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Internet"></activity>
+        <activity android:name=".About"
+                android:label="About"
+                android:theme="@android:style/Theme.Dialog">
+        </activity>
 
     </application>
 </manifest>

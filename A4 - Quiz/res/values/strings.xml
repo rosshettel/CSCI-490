@@ -5,4 +5,9 @@
     <string name="quiz">Take Quiz</string>
     <string name="study">Study</string>
     <string name="about">About</string>
+    <string name="about_title"><b><u>CSCI 490 - Quiz app</u></b></string>
+    <string name="about_version">Version <b>0.1b</b></string>
+    <string name="about_members">Designed by: Ross Hettel, John Miller, Alex Wohead</string>
+    <string name="about_quit">To quit, press your device\'s \'Home\' button</string>
+    
 </resources>
