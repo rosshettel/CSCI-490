@@ -9,5 +9,6 @@
     <string name="about_version">Version <b>0.1b</b></string>
     <string name="about_members">Designed by: Ross Hettel, John Miller, Alex Wohead</string>
     <string name="about_quit">To quit, press your device\'s \'Home\' button</string>
+    <string name="logtag">A4_debug</string>
     
 </resources>
