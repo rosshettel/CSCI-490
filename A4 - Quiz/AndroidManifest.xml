@@ -19,6 +19,7 @@
                 android:label="About"
                 android:theme="@android:style/Theme.Dialog">
         </activity>
+        <activity android:name="Quiz"></activity>
 
     </application>
 </manifest>

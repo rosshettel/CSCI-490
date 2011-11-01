@@ -40,15 +40,19 @@ public class StartActivity extends Activity {
     		Log.d("A4_debug", "About selected");
     		Intent about = new Intent(this, About.class);
             startActivity(about);
-    		return true;
+    		break;
     	case R.id.study:
     		Intent studyTime = new Intent(this, Internet.class);
     		startActivity(studyTime);
+    		break;
     	case R.id.take_quiz:
     		Log.d("A4_debug", "Take quiz selected");
-    		return true;
+    		Intent quiz = new Intent(this, Quiz.class);
+    		startActivity(quiz);
+    		break;
     	default:
     		return super.onOptionsItemSelected(item);
     	}
+    	return true;
     }
 }
