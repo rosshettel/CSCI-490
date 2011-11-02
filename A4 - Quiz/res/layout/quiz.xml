@@ -1,29 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--    PROGRAM:   Assignment 4, main.xml file
+       AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+       LOGON ID:  Z1549355, Z159807, Z1624450
+       DUE DATE:  11/02 at class time -->
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
   android:layout_width="match_parent"
-  android:layout_height="match_parent" android:weightSum="1">
-    <TableLayout android:id="@+id/tableLayout1" android:layout_width="match_parent" android:layout_height="match_parent">
-        <TableRow android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tableRow1">
-            <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/textView1" android:text="TextView" android:layout_gravity="left"></TextView>
-        </TableRow>
-        <TableRow android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tableRow2">
-            <RadioButton android:text="RadioButton" android:id="@+id/radioButton1" android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
-        </TableRow>
-        <TableRow android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tableRow3">
-            <RadioButton android:text="RadioButton" android:id="@+id/radioButton2" android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
-        </TableRow>
-        <TableRow android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/tableRow4">
-            <RadioButton android:text="RadioButton" android:id="@+id/radioButton3" android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
-        </TableRow>
-        <TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <RadioButton android:text="RadioButton" android:id="@+id/radioButton4" android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
-        </TableRow>
-        <TableRow android:id="@+id/tableRow6" android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <Button android:text="Button" android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-            <Button android:text="Button" android:layout_height="wrap_content" android:id="@+id/button2" android:layout_width="match_parent"></Button>
-        </TableRow>
+  android:layout_height="match_parent" 
+  android:weightSum="1">
+     <TableLayout 
+            android:id="@+id/tableLayout1" 
+            android:layout_width="match_parent" 
+            android:layout_height="match_parent">
+            <TableRow 
+                  android:layout_height="wrap_content" 
+                  android:layout_width="wrap_content" 
+                  android:id="@+id/tableRow1">
+            <TextView 
+                  android:layout_height="wrap_content" 
+                  android:layout_width="wrap_content" 
+                  android:id="@+id/textView1" 
+                  android:text="TextView" 
+                  android:layout_gravity="left">
+            </TextView>
+            </TableRow>
+            <TableRow 
+                  android:layout_height="wrap_content" 
+                  android:layout_width="wrap_content" 
+                  android:id="@+id/tableRow2">
+            <RadioButton 
+                  android:text="RadioButton" 
+                  android:id="@+id/radioButton1" 
+                  android:layout_width="wrap_content" 
+                  android:layout_height="wrap_content">
+            </RadioButton>
+            </TableRow>
+            <TableRow 
+                  android:layout_height="wrap_content" 
+                  android:layout_width="wrap_content" 
+                  android:id="@+id/tableRow3">
+            <RadioButton 
+                  android:text="RadioButton" 
+                  android:id="@+id/radioButton2" 
+                  android:layout_width="wrap_content" 
+                  android:layout_height="wrap_content">
+            </RadioButton>
+            </TableRow>
+            <TableRow 
+                  android:layout_height="wrap_content" 
+                  android:layout_width="wrap_content" 
+                  android:id="@+id/tableRow4">
+            <RadioButton 
+                  android:text="RadioButton" 
+                  android:id="@+id/radioButton3" 
+                  android:layout_width="wrap_content" 
+                  android:layout_height="wrap_content">
+            </RadioButton>
+            </TableRow>
+            <TableRow 
+                  android:id="@+id/tableRow5" 
+                  android:layout_width="wrap_content" 
+                  android:layout_height="wrap_content">
+            <RadioButton 
+                  android:text="RadioButton" 
+                  android:id="@+id/radioButton4" 
+                  android:layout_width="wrap_content" 
+                  android:layout_height="wrap_content">
+            </RadioButton>
+            </TableRow>
+            <TableRow 
+                  android:id="@+id/tableRow6" 
+                  android:layout_width="wrap_content" 
+                  android:layout_height="wrap_content">
+            <Button 
+                  android:text="Button" 
+                  android:id="@+id/button1" 
+                  android:layout_width="wrap_content" 
+                  android:layout_height="wrap_content">
+            </Button>
+            <Button 
+                  android:text="Button" 
+                  android:layout_height="wrap_content" 
+                  android:id="@+id/button2" 
+                  android:layout_width="match_parent">
+            </Button>
+            </TableRow>
     </TableLayout>
     
 </LinearLayout>
