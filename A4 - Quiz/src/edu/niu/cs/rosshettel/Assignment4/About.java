@@ -2,7 +2,7 @@
    PROGRAM:   Assignment 3 part 2
    AUTHOR:    Ross Hettel, John Miller, Alex Wohead
    LOGON ID:  Z1549355, Z159807, Z1624450
-   DUE DATE:  10/17 at class time
+   DUE DATE:  11/02 at class time
 
    FUNCTION:  The About class simply sets the content view
               to the About page of the program. The details
