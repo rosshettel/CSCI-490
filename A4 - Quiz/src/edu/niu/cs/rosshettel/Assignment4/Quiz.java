@@ -1,5 +1,7 @@
 package edu.niu.cs.rosshettel.Assignment4;
 
+import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -27,7 +29,21 @@ public class Quiz extends Activity {
 			//lets load the quiz data from the xml file
 			while (xpp.getEventType() != XmlPullParser.END_DOCUMENT)
 			{
-				//this is where we would load the xml question data
+				if(xpp.getEventType() == XmlPullParser.START_TAG)
+				{
+					if(xpp.getName().equals("question"))
+					Log.i(LOG_TAG, (String)xpp.getAttributeName(1));
+					Log.i(LOG_TAG, (String)xpp.getAttributeValue(1));
+					
+					Log.i(LOG_TAG, (String)xpp.getAttributeName(2));
+					Log.i(LOG_TAG, (String)xpp.getAttributeValue(2));
+				}
+				
+				try {
+					xpp.next();
+				} catch (IOException e) {
+					Log.e(LOG_TAG, "IOException: " + e.getMessage());
+				}
 			}
 		}
 		catch(XmlPullParserException e)
@@ -36,6 +52,7 @@ public class Quiz extends Activity {
 			//maybe display a toast message here as well?
 			return false;
 		}
+		
 		return true;
 	}
 
