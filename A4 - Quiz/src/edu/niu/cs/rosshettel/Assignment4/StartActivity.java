@@ -76,7 +76,7 @@ public class StartActivity extends Activity {
     	case R.id.about:
     		Log.d("A4_debug", "About selected");
     		Intent about = new Intent(this, About.class);
-                startActivity(about);
+            startActivity(about);
     		break;
     	case R.id.study:
     		Intent studyTime = new Intent(this, Internet.class);
