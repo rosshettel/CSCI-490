@@ -103,7 +103,11 @@ public class Quiz extends Activity {
 	    
 	    //set up button to move to next question
 	    nextButton  = (Button)findViewById(R.id.button2);
+	    //should only be enabled after user has entered a correct answer.
 	    nextButton.setEnabled(false);
+	    //Here's the onClickListener for the next question button.  It loads the next
+	    //question and its answer candidates.  If there are no more questions, it pops
+	    //up a toast message and launches the Goodbye activity.
 	    nextButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) 
@@ -139,12 +143,21 @@ public class Quiz extends Activity {
 		});
 	
 	}
-	
+
+    /****************************************************************
+		FUNCTION:   boolean loadXML()
+		ARGUMENTS:  none
+		RETURNS:    boolean, false if XML wasn't parsed properly
+		NOTES:      This grabs the quiz questions, answers, and answer
+		            candidates from the XML file.
+     ****************************************************************/
 	public boolean loadXML()
 	{
+		//load XML file
 		XmlPullParser xpp;
 		xpp = getResources().getXml(XML_FILE);		
 		
+		//counters to keep track of where you are in the array of Questions.
 		int currentCounter=0;
 		int questionCounter=0;
 		
@@ -152,30 +165,36 @@ public class Quiz extends Activity {
 			//lets load the quiz data from the xml file
 			while (xpp.getEventType() != XmlPullParser.END_DOCUMENT)
 			{
+				//do stuff if found the start tag
 				if(xpp.getEventType() == XmlPullParser.START_TAG)
 				{
-					//set up arrays
+					//set up quiz questions array
 					if(xpp.getName().equals("quiz"))
 					{
 						int temp = Integer.parseInt(xpp.getAttributeValue(1));
 						quizQuestions = new Question[temp+1];
 					}
+					
+					//grab question from XML file
 					if(xpp.getName().equals("question"))
 					{
+						//initialize new question
 						quizQuestions[questionCounter] = new Question();
 						
 						Log.d(LOG_TAG, "name: " + (String)xpp.getAttributeValue(0) + " | question counter: " + questionCounter);
 						
+						//set questions and correct answer
 						quizQuestions[questionCounter].setQuestion((String)xpp.getAttributeValue(1));
 						quizQuestions[questionCounter].setAnswer(Integer.parseInt(xpp.getAttributeValue(2)));
 						questionCounter++;
 					}	
-					//radio button listener here possibly
+					//grab candidate questions
 					if(xpp.getName().equals("candidate"))
 					{
 						quizQuestions[questionCounter-1].setCandidates(currentCounter, (String)xpp.getAttributeValue(0));
 						currentCounter++;
 					}
+					//reset counter if you get to the maximum number of choices specified above.
 					if(currentCounter == NUM_CHOICES)
 					{
 						currentCounter = 0; //reset counter
@@ -183,6 +202,7 @@ public class Quiz extends Activity {
 					
 				}
 				
+				//move to next XML tag
 				try {
 					xpp.next();
 				} catch (IOException e) {
@@ -190,15 +210,13 @@ public class Quiz extends Activity {
 				}
 			}
 		}
+		//catch the XML exception if there's a problem
 		catch(XmlPullParserException e)
 		{
 			Log.e("A4_debug", "XmlPullParserException: " + e.getMessage());
-			//maybe display a toast message here as well?
 			return false;
 		}
-		
 		return true;
-		
 	}
 
 }
