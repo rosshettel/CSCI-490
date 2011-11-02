@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--   PROGRAM:   Assignment 3, main.xml file
+       AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+       LOGON ID:  Z1549355, Z159807, Z1624450
+       DUE DATE:  11/02 at class time -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/mainLayout"
     android:weightSum="1">
-    <TextView android:text="@string/title" 
-    android:gravity="center" 
-    android:layout_height="wrap_content" 
-    android:layout_width="match_parent" 
-    android:layout_weight="0.46" 
-    android:capitalize="characters" 
-    android:textSize="25sp"
-    android:id="@+id/title_message">
-    </TextView>
+    <!-- Text View for Title Screen -->
+        <TextView android:text="@string/title" 
+        android:gravity="center" 
+        android:layout_height="wrap_content" 
+        android:layout_width="match_parent" 
+        android:layout_weight="0.46" 
+        android:capitalize="characters" 
+        android:textSize="25sp"
+        android:id="@+id/title_message">
+        </TextView>
 </LinearLayout>
