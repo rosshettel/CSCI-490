@@ -20,7 +20,9 @@
                 android:theme="@android:style/Theme.Dialog">
         </activity>
         <activity android:name="Quiz"></activity>
-        <activity android:name="Goodbye" android:theme="@android:style/Theme.Dialog" android:label="goodbye"></activity>
+        <activity android:name="Goodbye" 
+        		android:theme="@android:style/Theme.Dialog" 
+        		android:label="Quiz Finished!"></activity>
 
     </application>
 </manifest>

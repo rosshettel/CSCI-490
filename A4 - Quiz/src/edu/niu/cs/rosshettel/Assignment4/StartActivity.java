@@ -22,13 +22,10 @@ package edu.niu.cs.rosshettel.Assignment4;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class StartActivity extends Activity {
 	
@@ -43,7 +40,6 @@ public class StartActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        Resources res = getResources();
         
     }
     /****************************************************************

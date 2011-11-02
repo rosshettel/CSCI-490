@@ -24,6 +24,10 @@ public class Quiz extends Activity {
 	RadioGroup buttonGroup;
 	Question[] quizQuestions;
 	TextView questionTextView;
+	//this is the XML file
+	static final int XML_FILE = R.xml.questions;
+	//this is the number of possible choices
+	static final int NUM_CHOICES=4;
 	
 	static int currentQuestion;
 
@@ -111,11 +115,7 @@ public class Quiz extends Activity {
 	public boolean loadXML()
 	{
 		XmlPullParser xpp;
-		xpp = getResources().getXml(R.xml.questions);
-		TextView text = new TextView(this);
-		text = (TextView)findViewById(R.id.textView1);
-		
-		quizQuestions = new Question[4];
+		xpp = getResources().getXml(XML_FILE);		
 		
 		int currentCounter=0;
 		int questionCounter=0;
@@ -130,7 +130,7 @@ public class Quiz extends Activity {
 					if(xpp.getName().equals("quiz"))
 					{
 						int temp = Integer.parseInt(xpp.getAttributeValue(1));
-//						quizQuestions = new Question[temp];
+						quizQuestions = new Question[temp+1];
 					}
 					if(xpp.getName().equals("question"))
 					{
@@ -148,7 +148,7 @@ public class Quiz extends Activity {
 						quizQuestions[questionCounter-1].setCandidates(currentCounter, (String)xpp.getAttributeValue(0));
 						currentCounter++;
 					}
-					if(currentCounter == 4)
+					if(currentCounter == NUM_CHOICES)
 					{
 						currentCounter = 0; //reset counter
 					}
@@ -168,13 +168,6 @@ public class Quiz extends Activity {
 			//maybe display a toast message here as well?
 			return false;
 		}
-		
-		Log.d(LOG_TAG, quizQuestions[0].getQuestion());
-		Log.d(LOG_TAG, quizQuestions[0].getCandidate(0));
-		Log.d(LOG_TAG, quizQuestions[1].getQuestion());
-		Log.d(LOG_TAG, quizQuestions[1].getCandidate(1));
-		Log.d(LOG_TAG, quizQuestions[2].getQuestion());
-		Log.d(LOG_TAG, quizQuestions[2].getCandidate(2));
 		
 		return true;
 		
