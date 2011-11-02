@@ -25,7 +25,12 @@ public class Internet extends Activity {
     
     WebView bowser;
       
-    /** Called when the activity is first created. */
+    /****************************************************************
+   	FUNCTION:   void onCreate(Bundle)
+		ARGUMENTS:  saved instance state (Bundle)
+		RETURNS:    nothing
+		NOTES:      This will create a web browser and add a url to it.
+     ****************************************************************/
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
