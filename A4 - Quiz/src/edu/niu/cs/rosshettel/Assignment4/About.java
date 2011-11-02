@@ -22,7 +22,7 @@ import android.os.Bundle;
 
 public class About extends Activity {
      /****************************************************************
-        	FUNCTION:   void onCreate(Bundle)
+        FUNCTION:   void onCreate(Bundle)
 		ARGUMENTS:  saved instance state (Bundle)
 		RETURNS:    nothing
 		NOTES:      This simply changes the layout to the about

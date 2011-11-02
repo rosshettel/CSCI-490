@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--   PROGRAM:   Assignment 4, quiz.xml file
+       AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+       LOGON ID:  Z1549355, Z159807, Z1624450
+       DUE DATE:  11/02 at class time -->
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"

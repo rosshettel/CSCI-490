@@ -1,3 +1,18 @@
+/****************************************************************
+   PROGRAM:   Assignment 4
+   AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+   LOGON ID:  Z1549355, Z159807, Z1624450
+   DUE DATE:  11/02 at class time
+
+   FUNCTION:  The Quiz class implements the XML reading as well as the 
+              layout and quiz questions.
+
+   INPUT:     XML file, user input.
+
+   OUTPUT:    Quiz questions and answers.
+
+   NOTES:     None.
+****************************************************************/
 package edu.niu.cs.rosshettel.Assignment4;
 
 import java.io.IOException;
@@ -17,22 +32,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Quiz extends Activity {
-	//my fancy way of making a global log tag
 	private String LOG_TAG = "A4_debug";
-	Button checkButton, nextButton;
+	Button checkButton, nextButton; //quiz buttons
+	//here's the radio buttons and the group for them
 	RadioButton rbutton1, rbutton2, rbutton3, rbutton4;
 	RadioGroup buttonGroup;
+	//here's the array of questions
 	Question[] quizQuestions;
 	TextView questionTextView;
 	//this is the XML file
 	static final int XML_FILE = R.xml.questions;
 	//this is the number of possible choices
 	static final int NUM_CHOICES=4;
-	
+	//keeps track of the current question index
 	static int currentQuestion;
 
-
-	/** Called when the activity is first created. */
+    /****************************************************************
+    	FUNCTION:   void onCreate(Bundle)
+		ARGUMENTS:  saved instance state (Bundle)
+		RETURNS:    nothing
+		NOTES:      This sets the initial layout, checks the user's
+		            response to see if it is correct, and loads the
+		            next question when the user clicks the Next button.
+     ****************************************************************/
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -55,7 +77,12 @@ public class Quiz extends Activity {
 	    rbutton4 = (RadioButton)findViewById(R.id.radioButton4);
 	    rbutton4.setText(quizQuestions[0].getCandidate(3));
 	    
+	    //set up button to check user's answer
 	    checkButton = (Button)findViewById(R.id.button1);
+	    //Here's the onClickListener for the check answer button.  It compares the user's
+	    //answer to the correct answer in the Question class.  It pops up a toast message
+	    //whether the answer is correct or not.  It also controls whether the next question
+	    //button is clickable.  It is only clickable after the user has entered a correct answer.
 	    checkButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -74,6 +101,7 @@ public class Quiz extends Activity {
 			}
 		});
 	    
+	    //set up button to move to next question
 	    nextButton  = (Button)findViewById(R.id.button2);
 	    nextButton.setEnabled(false);
 	    nextButton.setOnClickListener(new View.OnClickListener() {

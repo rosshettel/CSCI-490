@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--   PROGRAM:   Assignment 4, strings.xml file
+       AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+       LOGON ID:  Z1549355, Z159807, Z1624450
+       DUE DATE:  11/02 at class time -->
 <resources>
     <string name="title">"iPod Trivia Quiz\nPress Menu key to begin"</string>
     <string name="app_name">A4 - Quiz</string>
