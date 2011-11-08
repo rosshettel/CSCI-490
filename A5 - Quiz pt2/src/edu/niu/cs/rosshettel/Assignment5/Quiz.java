@@ -16,12 +16,14 @@
 package edu.niu.cs.rosshettel.Assignment5;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,19 +35,34 @@ import android.widget.Toast;
 
 public class Quiz extends Activity {
 	private String LOG_TAG = "A4_debug";
+	
 	Button checkButton, nextButton; //quiz buttons
+	
 	//here's the radio buttons and the group for them
 	RadioButton rbutton1, rbutton2, rbutton3, rbutton4;
 	RadioGroup buttonGroup;
+	
 	//here's the array of questions
 	Question[] quizQuestions;
 	TextView questionTextView;
+	
 	//this is the XML file
 	static final int XML_FILE = R.xml.questions;
+	
 	//this is the number of possible choices
 	static final int NUM_CHOICES=4;
 	//keeps track of the current question index
 	static int currentQuestion;
+	
+	SQLiteDatabase quizDB;
+	static final String createStr = "CREATE TABLE quiz_table (" +
+			"id INTEGER PRIMARY KEY INDENT, " +
+			"question TEXT, " +
+			"ans1 TEXT, " +
+			"ans2 TEXT, " +
+			"ans3 TEXT, " +
+			"ans4 TEXT, " +
+			"correctAns INT)";
 
     /****************************************************************
     	FUNCTION:   void onCreate(Bundle)
@@ -61,6 +78,15 @@ public class Quiz extends Activity {
 	    setContentView(R.layout.quiz);
 	    buttonGroup = (RadioGroup)findViewById(R.id.radioGroup1);
 	    currentQuestion=0;
+	    
+	    quizDB = openOrCreateDatabase("quizDB.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
+	    quizDB.setLocale(Locale.getDefault());
+	    quizDB.setLockingEnabled(true);
+	    quizDB.setVersion(1);
+	    
+	    //set up database here - function for reading in xml and populating to database?
+	    
+	    
 	    loadXML();
 
 	    //set up initial question
@@ -142,6 +168,23 @@ public class Quiz extends Activity {
 			}
 		});
 	
+	}
+	
+	public void nextQuestion(Question newQuestion)
+	{
+		//get the ids of the text fields we want to change
+		questionTextView = (TextView)findViewById(R.id.textView1);
+		rbutton1 = (RadioButton)findViewById(R.id.radioButton1);
+	    rbutton2 = (RadioButton)findViewById(R.id.radioButton2);
+	    rbutton3 = (RadioButton)findViewById(R.id.radioButton3);
+	    rbutton4 = (RadioButton)findViewById(R.id.radioButton4);
+	    
+	    //now set the text fields to the question's data
+	    questionTextView.setText(newQuestion.getQuestion());
+	    rbutton1.setText(newQuestion.getCandidate(1));
+	    rbutton2.setText(newQuestion.getCandidate(1));
+	    rbutton3.setText(newQuestion.getCandidate(2));
+	    rbutton4.setText(newQuestion.getCandidate(3));
 	}
 
     /****************************************************************
