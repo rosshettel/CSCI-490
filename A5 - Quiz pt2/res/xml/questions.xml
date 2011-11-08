@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--   PROGRAM:   Assignment 4, questions.xml file
+       AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+       LOGON ID:  Z1549355, Z159807, Z1624450
+       DUE DATE:  11/2 at class time -->
+<quiz name="iPod Trivia" numQuestions="3">
+	<question 	name="01"
+				text="The Nano line was slated to replace which existing iPod product?"
+				answer="1">
+				<candidate text="a) iPod Photo" />
+				<candidate text="b) iPod Mini" />
+				<candidate text="c) iPod Classic" />
+				<candidate text="d) iPod Touch" />
+	</question>
+	<question	name="02"
+				text="Which of these was the last to be released?"
+				answer="3">
+				<candidate text="a) iPod Shuffle" />
+				<candidate text="b) iPod Mini" />
+				<candidate text="c) iPod Classic 10gb" />
+				<candidate text="d) iPod Nano" />
+	</question>
+	<question	name="03"
+				text="Which of these features is not available on the iPod Touch?"
+				answer="2">
+				<candidate text="a) Video playback" />
+				<candidate text="b) Netflix streaming" />
+				<candidate text="c) Widgets" />
+				<candidate text="d) Games" />
+	</question>
+</quiz>
