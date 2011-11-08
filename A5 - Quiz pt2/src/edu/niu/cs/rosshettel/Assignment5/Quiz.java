@@ -22,7 +22,9 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,7 +58,7 @@ public class Quiz extends Activity {
 	
 	SQLiteDatabase quizDB;
 	static final String createStr = "CREATE TABLE quiz_table (" +
-			"id INTEGER PRIMARY KEY INDENT, " +
+			"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
 			"question TEXT, " +
 			"ans1 TEXT, " +
 			"ans2 TEXT, " +
@@ -84,24 +86,16 @@ public class Quiz extends Activity {
 	    quizDB.setLockingEnabled(true);
 	    quizDB.setVersion(1);
 	    
-	    //set up database here - function for reading in xml and populating to database?
-	    
-	    
 	    loadXML();
-
-	    //set up initial question
-	    questionTextView = (TextView)findViewById(R.id.textView1);
-	    questionTextView.setText(quizQuestions[0].getQuestion());
 	    
-	    //set up initial answer candidates
-	    rbutton1 = (RadioButton)findViewById(R.id.radioButton1);
-	    rbutton1.setText(quizQuestions[0].getCandidate(0));
-	    rbutton2 = (RadioButton)findViewById(R.id.radioButton2);
-	    rbutton2.setText(quizQuestions[0].getCandidate(1));
-	    rbutton3 = (RadioButton)findViewById(R.id.radioButton3);
-	    rbutton3.setText(quizQuestions[0].getCandidate(2));
-	    rbutton4 = (RadioButton)findViewById(R.id.radioButton4);
-	    rbutton4.setText(quizQuestions[0].getCandidate(3));
+	    //set up database here - function for reading in xml and populating to database?
+	    quizDB = buildTableFromQuestions(quizDB, quizQuestions);
+	    
+	    
+	    
+	    //load the initial question
+	    nextQuestion(quizQuestions[0]);
+
 	    
 	    //set up button to check user's answer
 	    checkButton = (Button)findViewById(R.id.button1);
@@ -144,15 +138,8 @@ public class Quiz extends Activity {
 				Log.d(LOG_TAG, "Array length is: " + quizQuestions.length);
 				if(currentQuestion < quizQuestions.length-1)
 				{
-				    //set up next question
-				    questionTextView.setText(quizQuestions[currentQuestion].getQuestion());
-				    
-				    //set up next answer candidates
-				    rbutton1.setText(quizQuestions[currentQuestion].getCandidate(0));
-				    rbutton2.setText(quizQuestions[currentQuestion].getCandidate(1));
-				    rbutton3.setText(quizQuestions[currentQuestion].getCandidate(2));
-				    rbutton4.setText(quizQuestions[currentQuestion].getCandidate(3));
-				    nextButton.setEnabled(false);
+					//set the text to the next question
+					nextQuestion(quizQuestions[currentQuestion]);
 				    
 				    //reset radio buttons
 				    buttonGroup.clearCheck();
@@ -170,6 +157,42 @@ public class Quiz extends Activity {
 	
 	}
 	
+	public SQLiteDatabase buildTableFromQuestions(SQLiteDatabase db, Question[] questions)
+	{
+		//first try creating the database
+		try { db.execSQL(createStr); }
+		catch(SQLException e)
+		{
+			Log.d(LOG_TAG, "Error creating DB: " + e.getMessage());
+			Toast.makeText(Quiz.this, "Error creating DB!", Toast.LENGTH_LONG).show();
+			return db;
+		}
+		
+		ContentValues values = new ContentValues();
+		
+		//step through and populate the database from the array of questions
+		for(int i = 0; i <= questions.length - 1; i++)
+		{
+			try {
+				values.put("question", questions[i].getQuestion());
+				values.put("ans1", questions[i].getCandidate(0));
+				values.put("ans2", questions[i].getCandidate(1));
+				values.put("ans3", questions[i].getCandidate(2));
+				values.put("ans4", questions[i].getCandidate(3));
+				
+				db.insert("quiz_table", null, values);
+			} catch(SQLException e) {
+				Log.d(LOG_TAG, "Sql Exception: " + e.getMessage());
+				//deal with this error here
+			} catch(NullPointerException n) {
+				Log.d(LOG_TAG, "Null pointer exception: " + n.getMessage());
+			}
+		}
+		
+		return db;
+		
+	}
+	
 	public void nextQuestion(Question newQuestion)
 	{
 		//get the ids of the text fields we want to change
@@ -181,7 +204,7 @@ public class Quiz extends Activity {
 	    
 	    //now set the text fields to the question's data
 	    questionTextView.setText(newQuestion.getQuestion());
-	    rbutton1.setText(newQuestion.getCandidate(1));
+	    rbutton1.setText(newQuestion.getCandidate(0));
 	    rbutton2.setText(newQuestion.getCandidate(1));
 	    rbutton3.setText(newQuestion.getCandidate(2));
 	    rbutton4.setText(newQuestion.getCandidate(3));
