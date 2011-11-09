@@ -52,6 +52,11 @@ public class Question {
 		rightAnswer = answer;
 	}
 	
+	public int getCorrectAnswer()
+	{
+		return rightAnswer;
+	}
+	
 	/* check answer if it's right and return the appropriate bool */
 	public boolean checkAnswer(int answer)
 	{

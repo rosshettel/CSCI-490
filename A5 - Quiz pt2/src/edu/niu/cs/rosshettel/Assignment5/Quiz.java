@@ -24,6 +24,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -80,18 +81,24 @@ public class Quiz extends Activity {
 	    setContentView(R.layout.quiz);
 	    buttonGroup = (RadioGroup)findViewById(R.id.radioGroup1);
 	    currentQuestion=0;
+	    int isTable = 0;
 	    
 	    quizDB = openOrCreateDatabase("quizDB.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
 	    quizDB.setLocale(Locale.getDefault());
 	    quizDB.setLockingEnabled(true);
 	    quizDB.setVersion(1);
 	    
-	    loadXML();
+	    //check if the table actually exists yet
+	    Cursor hazTable = quizDB.rawQuery("SELECT COUNT() FROM 'quiz_table'", null); 
+	    if(hazTable.getCount() == 0)
+	    {
+	    	Log.d(LOG_TAG, "im now building the table from the xml");
+	    	loadXML();
+	    	buildTableFromQuestions(quizDB, quizQuestions);
+	    }	    
 	    
-	    //set up database here - function for reading in xml and populating to database?
-	    quizDB = buildTableFromQuestions(quizDB, quizQuestions);
-	    
-	    
+	    //load the questions from sql
+	    quizQuestions = loadQuestionsFromSQL(quizDB);
 	    
 	    //load the initial question
 	    nextQuestion(quizQuestions[0]);
@@ -136,7 +143,8 @@ public class Quiz extends Activity {
 				//if not end of array, load next question
 				Log.d(LOG_TAG, "Index is: " + currentQuestion);
 				Log.d(LOG_TAG, "Array length is: " + quizQuestions.length);
-				if(currentQuestion < quizQuestions.length-1)
+				
+				if(currentQuestion < quizQuestions.length)
 				{
 					//set the text to the next question
 					nextQuestion(quizQuestions[currentQuestion]);
@@ -157,7 +165,32 @@ public class Quiz extends Activity {
 	
 	}
 	
-	public SQLiteDatabase buildTableFromQuestions(SQLiteDatabase db, Question[] questions)
+	public Question[] loadQuestionsFromSQL(SQLiteDatabase db)
+	{
+		
+		Cursor cur;
+		Question[] questionArray;
+		
+		cur = db.rawQuery("SELECT * FROM quiz_table", null);
+		questionArray = new Question[cur.getCount()];
+		int i = 0;
+		
+		//loop through the results
+		cur.moveToFirst();
+		while(!cur.isAfterLast())
+		{
+			questionArray[i] = new Question();
+			questionArray[i].setQuestion(cur.getString(1));
+			questionArray[i].setAnswer(cur.getInt(6));
+			for(int c = 0; c < 4; c++)
+				questionArray[i].setCandidates(c, cur.getString(c + 2));
+			i++;
+			cur.moveToNext();
+		}
+		return questionArray;
+	}
+	
+	public void buildTableFromQuestions(SQLiteDatabase db, Question[] questions)
 	{
 		//first try creating the database
 		try { db.execSQL(createStr); }
@@ -165,7 +198,6 @@ public class Quiz extends Activity {
 		{
 			Log.d(LOG_TAG, "Error creating DB: " + e.getMessage());
 			Toast.makeText(Quiz.this, "Error creating DB!", Toast.LENGTH_LONG).show();
-			return db;
 		}
 		
 		ContentValues values = new ContentValues();
@@ -179,6 +211,7 @@ public class Quiz extends Activity {
 				values.put("ans2", questions[i].getCandidate(1));
 				values.put("ans3", questions[i].getCandidate(2));
 				values.put("ans4", questions[i].getCandidate(3));
+				values.put("correctAns", questions[i].getCorrectAnswer());
 				
 				db.insert("quiz_table", null, values);
 			} catch(SQLException e) {
@@ -187,10 +220,7 @@ public class Quiz extends Activity {
 			} catch(NullPointerException n) {
 				Log.d(LOG_TAG, "Null pointer exception: " + n.getMessage());
 			}
-		}
-		
-		return db;
-		
+		}		
 	}
 	
 	public void nextQuestion(Question newQuestion)
