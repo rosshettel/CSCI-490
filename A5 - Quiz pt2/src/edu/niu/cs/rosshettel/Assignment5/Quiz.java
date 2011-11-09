@@ -57,7 +57,9 @@ public class Quiz extends Activity {
 	Question[] quizQuestions;
 	TextView questionTextView;
 	
-	//this is for the background music and sound effects
+	//this is for the background music
+	MediaPlayer background;
+	//this is for the sound effects
 	MediaPlayer mplayer;
 	
 	//this is the XML file
@@ -98,9 +100,9 @@ public class Quiz extends Activity {
 	    currentQuestion=0;
 	    
 	    //load the background music file
-	    mplayer = MediaPlayer.create(getBaseContext(), R.raw.jeopardy_think);
-	    mplayer.setLooping(true);
-	    mplayer.start();
+	    background = MediaPlayer.create(getBaseContext(), R.raw.jeopardy_think);
+	    background.setLooping(true);
+	    background.start();
 	    
 	    //these lines will create a new device-local SQL database if it
 	    //does not already exist.
@@ -187,7 +189,7 @@ public class Quiz extends Activity {
 				else
 				{
 					//stop the music
-					mplayer.reset();
+					background.reset();
 					//play end noise
 				    mplayer = MediaPlayer.create(getBaseContext(), R.raw.complete);
 				    mplayer.setLooping(false);
@@ -434,7 +436,7 @@ public class Quiz extends Activity {
     	{
     	case R.id.stop_music:
     		Log.d("A4_debug", "Stop selected");
-    		mplayer.reset();
+    		background.reset();
     		break;
     	default:
     		return super.onOptionsItemSelected(item);
