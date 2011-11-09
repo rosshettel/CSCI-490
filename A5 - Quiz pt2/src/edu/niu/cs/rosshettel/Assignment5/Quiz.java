@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +49,8 @@ public class Quiz extends Activity {
 	//here's the array of questions
 	Question[] quizQuestions;
 	TextView questionTextView;
+	
+	MediaPlayer mplayer;
 	
 	//this is the XML file
 	static final int XML_FILE = R.xml.questions;
@@ -81,7 +84,11 @@ public class Quiz extends Activity {
 	    setContentView(R.layout.quiz);
 	    buttonGroup = (RadioGroup)findViewById(R.id.radioGroup1);
 	    currentQuestion=0;
-	    int isTable = 0;
+	    
+	    //load the media file
+	    mplayer = MediaPlayer.create(getBaseContext(), R.raw.jeopardy_think);
+	    mplayer.setLooping(true);
+	    mplayer.start();
 	    
 	    quizDB = openOrCreateDatabase("quizDB.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
 	    quizDB.setLocale(Locale.getDefault());
@@ -148,12 +155,15 @@ public class Quiz extends Activity {
 				{
 					//set the text to the next question
 					nextQuestion(quizQuestions[currentQuestion]);
+					
+					mplayer.seekTo(0);
 				    
 				    //reset radio buttons
 				    buttonGroup.clearCheck();
 				}
 				else
 				{
+					mplayer.stop();
 					Log.d(LOG_TAG, "Got to else.");
 					Toast.makeText(Quiz.this, "You're done!", Toast.LENGTH_LONG).show();
 					nextButton.setEnabled(false);
