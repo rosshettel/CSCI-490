@@ -30,6 +30,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -155,11 +157,15 @@ public class Quiz extends Activity {
 				{
 					//set the text to the next question
 					nextQuestion(quizQuestions[currentQuestion]);
-					
+					//TODO probably add deactivate next button
+					//also load next correct answer
 					mplayer.seekTo(0);
 				    
 				    //reset radio buttons
 				    buttonGroup.clearCheck();
+				    
+				    //next button should only be enabled after user has entered a correct answer.
+				    nextButton.setEnabled(false);
 				}
 				else
 				{
@@ -339,4 +345,34 @@ public class Quiz extends Activity {
 		return true;
 	}
 
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu passedMenu)
+    {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.stop_menu, passedMenu);
+    	return true;
+    }
+    /****************************************************************
+		FUNCTION:   boolean onOptionsItemSelected(MenuItem)
+		ARGUMENTS:  saved instance state (Bundle)
+		RETURNS:    true
+		NOTES:      This function has a case statement with each
+		            of the options listed. If any option is chosen
+		            its case statement will execute the class
+		            for that option.
+    ****************************************************************/
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+    	switch (item.getItemId())
+    	{
+    	case R.id.stop_music:
+    		Log.d("A4_debug", "Stop selected");
+    		mplayer.stop();
+    		break;
+    	default:
+    		return super.onOptionsItemSelected(item);
+    	}
+    	return true;
+    }
 }

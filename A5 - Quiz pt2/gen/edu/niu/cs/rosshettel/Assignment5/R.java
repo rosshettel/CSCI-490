@@ -13,8 +13,9 @@ public final class R {
     public static final class drawable {
         public static final int about=0x7f020000;
         public static final int icon=0x7f020001;
-        public static final int study=0x7f020002;
-        public static final int test=0x7f020003;
+        public static final int music_note=0x7f020002;
+        public static final int study=0x7f020003;
+        public static final int test=0x7f020004;
     }
     public static final class id {
         public static final int about=0x7f080011;
@@ -30,6 +31,7 @@ public final class R {
         public static final int radioButton3=0x7f08000b;
         public static final int radioButton4=0x7f08000c;
         public static final int radioGroup1=0x7f080008;
+        public static final int stop_music=0x7f080012;
         public static final int study=0x7f080010;
         public static final int take_quiz=0x7f08000f;
         public static final int textView1=0x7f080007;
@@ -45,6 +47,7 @@ public final class R {
     }
     public static final class menu {
         public static final int menu=0x7f070000;
+        public static final int stop_menu=0x7f070001;
     }
     public static final class raw {
         public static final int jeopardy_think=0x7f050000;
@@ -62,6 +65,7 @@ public final class R {
         public static final int goodbye_title=0x7f06000d;
         public static final int logtag=0x7f060009;
         public static final int quiz=0x7f060002;
+        public static final int stop=0x7f060010;
         public static final int study=0x7f060003;
         public static final int textCheck=0x7f06000a;
         public static final int textNext=0x7f06000b;
