@@ -188,6 +188,7 @@ public class Quiz extends Activity {
 				{
 					//stop the music
 					mplayer.reset();
+					//play end noise
 				    mplayer = MediaPlayer.create(getBaseContext(), R.raw.complete);
 				    mplayer.setLooping(false);
 				    mplayer.start();
