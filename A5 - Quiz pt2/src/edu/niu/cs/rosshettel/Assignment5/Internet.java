@@ -2,7 +2,7 @@
    PROGRAM:   Assignment 5
    AUTHOR:    Ross Hettel, John Miller, Alex Wohead
    LOGON ID:  Z1549355, Z159807, Z1624450
-   DUE DATE:  11/02 at class time
+   DUE DATE:  11/09 at class time
 
    FUNCTION:  This the Internet class creates an Internet object
               with the url set to a Wikipedia article on iPod's.

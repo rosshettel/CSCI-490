@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--   PROGRAM:   Assignment 4, about.xml file
+<!--   PROGRAM:   Assignment 5, about.xml file
        AUTHOR:    Ross Hettel, John Miller, Alex Wohead
        LOGON ID:  Z1549355, Z159807, Z1624450
-       DUE DATE:  11/02 at class time -->
+       DUE DATE:  11/09 at class time -->
 <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"

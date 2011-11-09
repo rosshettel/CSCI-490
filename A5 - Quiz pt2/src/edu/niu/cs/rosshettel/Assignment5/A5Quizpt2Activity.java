@@ -1,3 +1,19 @@
+/****************************************************************
+   PROGRAM:   Assignment 5
+   AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+   LOGON ID:  Z1549355, Z159807, Z1624450
+   DUE DATE:  11/09 at class time
+
+   FUNCTION:  The A5Quizpt2Activity sets the default screen when the
+              app is opened.
+
+   INPUT:     None.
+
+   OUTPUT:    Home screen.
+
+   NOTES:     None.
+****************************************************************/
+
 package edu.niu.cs.rosshettel.Assignment5;
 
 import android.app.Activity;
