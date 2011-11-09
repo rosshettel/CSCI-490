@@ -89,8 +89,8 @@ public class Quiz extends Activity {
 	    quizDB.setVersion(1);
 	    
 	    //check if the table actually exists yet
-	    Cursor hazTable = quizDB.rawQuery("SELECT COUNT() FROM 'quiz_table'", null); 
-	    if(hazTable.getCount() == 0)
+//	    Cursor hazTable = quizDB.rawQuery("SELECT COUNT() FROM 'quiz_table'", null); 
+	    if(!doesTableExist("quiz_table"))
 	    {
 	    	Log.d(LOG_TAG, "im now building the table from the xml");
 	    	loadXML();
@@ -163,6 +163,20 @@ public class Quiz extends Activity {
 			}
 		});
 	
+	}
+	
+	public boolean doesTableExist(String tableName)
+	{
+		Cursor rs = null;
+		try {
+			rs = quizDB.rawQuery("SELECT * FROM " + tableName + " WHERE 1 = 0", null);
+			return true;
+		} catch (Exception ex) {
+			return false;
+		} finally {
+			if (rs != null)
+				rs.close();
+		}
 	}
 	
 	public Question[] loadQuestionsFromSQL(SQLiteDatabase db)
