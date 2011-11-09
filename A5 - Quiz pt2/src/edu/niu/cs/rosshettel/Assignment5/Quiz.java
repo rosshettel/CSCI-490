@@ -1,5 +1,5 @@
 /****************************************************************
-   PROGRAM:   Assignment 4
+   PROGRAM:   Assignment 5
    AUTHOR:    Ross Hettel, John Miller, Alex Wohead
    LOGON ID:  Z1549355, Z159807, Z1624450
    DUE DATE:  11/02 at class time
@@ -128,11 +128,17 @@ public class Quiz extends Activity {
 				{
 					Toast.makeText(Quiz.this, "Correct!", Toast.LENGTH_SHORT).show();
 					nextButton.setEnabled(true);
+				    mplayer = MediaPlayer.create(getBaseContext(), R.raw.right);
+				    mplayer.setLooping(false);
+				    mplayer.start();
 				}
 				else
 				{
 					Toast.makeText(Quiz.this, "Incorrect answer", Toast.LENGTH_SHORT).show();
 					nextButton.setEnabled(false);
+				    mplayer = MediaPlayer.create(getBaseContext(), R.raw.wrong);
+				    mplayer.setLooping(false);
+				    mplayer.start();
 				}
 			}
 		});
@@ -159,7 +165,6 @@ public class Quiz extends Activity {
 					nextQuestion(quizQuestions[currentQuestion]);
 					//TODO probably add deactivate next button
 					//also load next correct answer
-					mplayer.seekTo(0);
 				    
 				    //reset radio buttons
 				    buttonGroup.clearCheck();
@@ -169,7 +174,7 @@ public class Quiz extends Activity {
 				}
 				else
 				{
-					mplayer.stop();
+					mplayer.reset();
 					Log.d(LOG_TAG, "Got to else.");
 					Toast.makeText(Quiz.this, "You're done!", Toast.LENGTH_LONG).show();
 					nextButton.setEnabled(false);
@@ -242,6 +247,7 @@ public class Quiz extends Activity {
 				values.put("ans3", questions[i].getCandidate(2));
 				values.put("ans4", questions[i].getCandidate(3));
 				values.put("correctAns", questions[i].getCorrectAnswer());
+				Log.d(LOG_TAG, "Correct answer: " + questions[i].getCorrectAnswer());
 				
 				db.insert("quiz_table", null, values);
 			} catch(SQLException e) {
@@ -356,10 +362,8 @@ public class Quiz extends Activity {
 		FUNCTION:   boolean onOptionsItemSelected(MenuItem)
 		ARGUMENTS:  saved instance state (Bundle)
 		RETURNS:    true
-		NOTES:      This function has a case statement with each
-		            of the options listed. If any option is chosen
-		            its case statement will execute the class
-		            for that option.
+		NOTES:      This function simply provides a menu button to
+		            stop the music, should the user find it annoying.
     ****************************************************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -368,7 +372,7 @@ public class Quiz extends Activity {
     	{
     	case R.id.stop_music:
     		Log.d("A4_debug", "Stop selected");
-    		mplayer.stop();
+    		mplayer.reset();
     		break;
     	default:
     		return super.onOptionsItemSelected(item);
