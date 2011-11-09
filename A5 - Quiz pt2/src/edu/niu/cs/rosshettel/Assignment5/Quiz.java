@@ -188,6 +188,9 @@ public class Quiz extends Activity {
 				{
 					//stop the music
 					mplayer.reset();
+				    mplayer = MediaPlayer.create(getBaseContext(), R.raw.complete);
+				    mplayer.setLooping(false);
+				    mplayer.start();
 					Log.d(LOG_TAG, "Got to else.");
 					//pop up a "quiz complete" toast message
 					Toast.makeText(Quiz.this, "You're done!", Toast.LENGTH_LONG).show();
