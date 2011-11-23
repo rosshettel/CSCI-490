@@ -1,13 +1,18 @@
 /****************************************************************
-   PROGRAM:   Assignment 4
+   PROGRAM:   Assignment 5
    AUTHOR:    Ross Hettel, John Miller, Alex Wohead
    LOGON ID:  Z1549355, Z159807, Z1624450
-   DUE DATE:  11/02 at class time
+   DUE DATE:  11/09 at class time
 
-   FUNCTION:  The Quiz class implements the XML reading as well as the 
-              layout and quiz questions.
+   FUNCTION:  This class implements the SQL database.  It will check
+              to see if the SQL database exists first.  If it exists,
+              it will skip to displaying the questions and answers as
+              well as handling user input (checking if answer is correct,
+              moving to next question, etc).  If the database does not
+              exist yet, it will create a new device-local database
+              from the XML file with the questions.
 
-   INPUT:     XML file, user input.
+   INPUT:     XML file, SQL database, user input.
 
    OUTPUT:    Quiz questions and answers.
 
@@ -27,8 +32,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -49,6 +57,11 @@ public class Quiz extends Activity {
 	Question[] quizQuestions;
 	TextView questionTextView;
 	
+	//this is for the background music
+	MediaPlayer background;
+	//this is for the sound effects
+	MediaPlayer mplayer;
+	
 	//this is the XML file
 	static final int XML_FILE = R.xml.questions;
 	
@@ -57,6 +70,7 @@ public class Quiz extends Activity {
 	//keeps track of the current question index
 	static int currentQuestion;
 	
+	//create database and string to make table in database
 	SQLiteDatabase quizDB;
 	static final String createStr = "CREATE TABLE quiz_table (" +
 			"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -74,23 +88,31 @@ public class Quiz extends Activity {
 		NOTES:      This sets the initial layout, checks the user's
 		            response to see if it is correct, and loads the
 		            next question when the user clicks the Next button.
+		            It also handles creating the device-local SQL 
+		            database if it does not exist yet.
      ****************************************************************/
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.quiz);
+	    //set up radio button layout
 	    buttonGroup = (RadioGroup)findViewById(R.id.radioGroup1);
 	    currentQuestion=0;
-	    int isTable = 0;
 	    
+	    //load the background music file
+	    background = MediaPlayer.create(getBaseContext(), R.raw.jeopardy_think);
+	    background.setLooping(true);
+	    background.start();
+	    
+	    //these lines will create a new device-local SQL database if it
+	    //does not already exist.
 	    quizDB = openOrCreateDatabase("quizDB.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
 	    quizDB.setLocale(Locale.getDefault());
 	    quizDB.setLockingEnabled(true);
 	    quizDB.setVersion(1);
 	    
-	    //check if the table actually exists yet
-	    Cursor hazTable = quizDB.rawQuery("SELECT COUNT() FROM 'quiz_table'", null); 
-	    if(hazTable.getCount() == 0)
+	    //if table does not exist yet, create the table for the questions
+	    if(!doesTableExist("quiz_table"))
 	    {
 	    	Log.d(LOG_TAG, "im now building the table from the xml");
 	    	loadXML();
@@ -110,6 +132,7 @@ public class Quiz extends Activity {
 	    //answer to the correct answer in the Question class.  It pops up a toast message
 	    //whether the answer is correct or not.  It also controls whether the next question
 	    //button is clickable.  It is only clickable after the user has entered a correct answer.
+	    //One final thing this block of code does is play a correct/incorrect answer sound.
 	    checkButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -119,11 +142,19 @@ public class Quiz extends Activity {
 				{
 					Toast.makeText(Quiz.this, "Correct!", Toast.LENGTH_SHORT).show();
 					nextButton.setEnabled(true);
+					//these three lines play the audio file
+				    mplayer = MediaPlayer.create(getBaseContext(), R.raw.right);
+				    mplayer.setLooping(false);
+				    mplayer.start();
 				}
 				else
 				{
 					Toast.makeText(Quiz.this, "Incorrect answer", Toast.LENGTH_SHORT).show();
 					nextButton.setEnabled(false);
+					//these three lines play the audio file
+				    mplayer = MediaPlayer.create(getBaseContext(), R.raw.wrong);
+				    mplayer.setLooping(false);
+				    mplayer.start();
 				}
 			}
 		});
@@ -151,12 +182,24 @@ public class Quiz extends Activity {
 				    
 				    //reset radio buttons
 				    buttonGroup.clearCheck();
+				    
+				    //next button should only be enabled after user has entered a correct answer.
+				    nextButton.setEnabled(false);
 				}
 				else
 				{
+					//stop the music
+					background.reset();
+					//play end noise
+				    mplayer = MediaPlayer.create(getBaseContext(), R.raw.complete);
+				    mplayer.setLooping(false);
+				    mplayer.start();
 					Log.d(LOG_TAG, "Got to else.");
+					//pop up a "quiz complete" toast message
 					Toast.makeText(Quiz.this, "You're done!", Toast.LENGTH_LONG).show();
+					//disable next button, as there is no next question
 					nextButton.setEnabled(false);
+					//show goodbye screen
 					Intent goodbye = new Intent(Quiz.this, Goodbye.class);
 		            startActivity(goodbye);
 				}
@@ -165,31 +208,74 @@ public class Quiz extends Activity {
 	
 	}
 	
+    /****************************************************************
+		FUNCTION:   boolean doesTableExist(String tableName)
+		ARGUMENTS:  String
+		RETURNS:    boolean, false if table does not exist
+		NOTES:      This simply checks if the table exists yet. Returns
+		            true if table exists, false otherwise.
+     ****************************************************************/
+	public boolean doesTableExist(String tableName)
+	{
+		Cursor rs = null;
+		try {
+			rs = quizDB.rawQuery("SELECT * FROM " + tableName + " WHERE 1 = 0", null);
+			return true;
+		} catch (Exception ex) {
+			return false;
+		} finally {
+			if (rs != null)
+				rs.close();
+		}
+	}
+	
+	/****************************************************************
+		FUNCTION:   Question[] loadQuestionsFromSQL(SQLiteDatabase db)
+		ARGUMENTS:  SQLite database
+		RETURNS:    array of Question objects
+		NOTES:      This loads the questions from the SQL database
+		            into an array of Question objects.
+	 ****************************************************************/
 	public Question[] loadQuestionsFromSQL(SQLiteDatabase db)
 	{
-		
 		Cursor cur;
 		Question[] questionArray;
 		
+		//grab all rows from table
 		cur = db.rawQuery("SELECT * FROM quiz_table", null);
+		//count number of rows
 		questionArray = new Question[cur.getCount()];
 		int i = 0;
 		
-		//loop through the results
+		//loop through the results from the table
 		cur.moveToFirst();
 		while(!cur.isAfterLast())
 		{
+			//make a new question object
 			questionArray[i] = new Question();
+			//set the question
 			questionArray[i].setQuestion(cur.getString(1));
+			//set the answer
 			questionArray[i].setAnswer(cur.getInt(6));
+			//set the candidates
 			for(int c = 0; c < 4; c++)
 				questionArray[i].setCandidates(c, cur.getString(c + 2));
+			//increment
 			i++;
 			cur.moveToNext();
 		}
 		return questionArray;
 	}
 	
+	/****************************************************************
+		FUNCTION:   void buildTableFromQuestions(SQLiteDatabase db, Question[] questions)
+		ARGUMENTS:  database, question array
+		RETURNS:    nothing
+		NOTES:      This loads the questions from the question array built
+		            by the loadXml function.  We thought this would be
+		            a better method than hard-coding the questions
+		            as it makes for more adaptable code.
+	 ****************************************************************/
 	public void buildTableFromQuestions(SQLiteDatabase db, Question[] questions)
 	{
 		//first try creating the database
@@ -212,6 +298,7 @@ public class Quiz extends Activity {
 				values.put("ans3", questions[i].getCandidate(2));
 				values.put("ans4", questions[i].getCandidate(3));
 				values.put("correctAns", questions[i].getCorrectAnswer());
+				Log.d(LOG_TAG, "Correct answer: " + questions[i].getCorrectAnswer());
 				
 				db.insert("quiz_table", null, values);
 			} catch(SQLException e) {
@@ -223,6 +310,12 @@ public class Quiz extends Activity {
 		}		
 	}
 	
+	/****************************************************************
+		FUNCTION:   void nextQuestion(Question newQuestion)
+		ARGUMENTS:  Question object
+		RETURNS:    nothing
+		NOTES:      This loads the next question onto the user interface.
+	 ****************************************************************/
 	public void nextQuestion(Question newQuestion)
 	{
 		//get the ids of the text fields we want to change
@@ -315,4 +408,39 @@ public class Quiz extends Activity {
 		return true;
 	}
 
+    /****************************************************************
+		FUNCTION:   boolean onOptionsItemSelected(MenuItem)
+		ARGUMENTS:  saved instance state (Bundle)
+		RETURNS:    true
+		NOTES:      This function simply provides a menu button to
+		            stop the music, should the user find it annoying.
+    ****************************************************************/
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu passedMenu)
+    {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.stop_menu, passedMenu);
+    	return true;
+    }
+    /****************************************************************
+		FUNCTION:   boolean onOptionsItemSelected(MenuItem)
+		ARGUMENTS:  saved instance state (Bundle)
+		RETURNS:    true
+		NOTES:      This function is the click handler for when the
+		            user presses the stop button in the menu.
+    ****************************************************************/
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+    	switch (item.getItemId())
+    	{
+    	case R.id.stop_music:
+    		Log.d("A4_debug", "Stop selected");
+    		background.reset();
+    		break;
+    	default:
+    		return super.onOptionsItemSelected(item);
+    	}
+    	return true;
+    }
 }

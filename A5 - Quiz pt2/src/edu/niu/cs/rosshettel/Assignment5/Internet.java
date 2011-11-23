@@ -1,17 +1,17 @@
 /****************************************************************
-   PROGRAM:   Assignment 4
+   PROGRAM:   Assignment 5
    AUTHOR:    Ross Hettel, John Miller, Alex Wohead
    LOGON ID:  Z1549355, Z159807, Z1624450
-   DUE DATE:  11/02 at class time
+   DUE DATE:  11/09 at class time
 
    FUNCTION:  This the Internet class creates an Internet object
-              with the url set to a wikipedia article on ipod's.
+              with the url set to a Wikipedia article on iPod's.
               This function is used when the user wishes to study
               for the quiz.
 
    INPUT:     NONE
 
-   OUTPUT:    It pops up the ipod wikipedia article
+   OUTPUT:    It pops up the iPod Wikipedia article
 
    NOTES:     None.
 ****************************************************************/
@@ -38,7 +38,7 @@ public class Internet extends Activity {
         bowser=(WebView)findViewById(R.id.webkit);
         
         //make the browser show the wikipedia article on ipods
-        bowser.loadUrl("http://en.wikipedia.org/w/index.php?title=IPod&useformat=mobile");
+        bowser.loadUrl("http://en.wikipedia.org/w/index.php?%20title=IPod&useformat=mobile");
         
     }
 }

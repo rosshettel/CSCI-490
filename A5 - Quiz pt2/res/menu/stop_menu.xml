@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--   PROGRAM:   Assignment 5, stop_menu.xml file
+       AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+       LOGON ID:  Z1549355, Z159807, Z1624450
+       DUE DATE:  11/09 at class time -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+     <item android:id="@+id/stop_music"
+           android:icon="@drawable/music_note"
+           android:title="@string/stop" />
+</menu>

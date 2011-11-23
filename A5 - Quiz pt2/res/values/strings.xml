@@ -5,7 +5,7 @@
        DUE DATE:  11/02 at class time -->
 <resources>
     <string name="title">"iPod Trivia Quiz\nPress Menu key to begin"</string>
-    <string name="app_name">A4 - Quiz</string>
+    <string name="app_name">A5 - Quiz</string>
     <string name="quiz">Take Quiz</string>
     <string name="study">Study</string>
     <string name="about">About</string>
@@ -19,5 +19,6 @@
     <string name="goodbye">Goodbye</string>
     <string name="goodbye_title">CSCI 490 - Quiz app</string>
     <string name="goodbye_members">Designed by: Ross Hettel, John Miller, Alex Wohead</string>
-    <string name="goodbye_quit">To quit, press your device\'s \'Home\' button</string>    
+    <string name="goodbye_quit">To quit, press your device\'s \'Home\' button</string> 
+    <string name="stop">Stop Music</string>    
 </resources>
