@@ -4,16 +4,21 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:weightSum="1">
-        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar01" android:layout_width="match_parent"></ProgressBar>
-        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar02" android:layout_width="match_parent"></ProgressBar>
-        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar03" android:layout_width="match_parent"></ProgressBar>
-        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar04" android:layout_width="match_parent"></ProgressBar>
-        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar05" android:layout_width="match_parent"></ProgressBar>
-        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar06" android:layout_width="match_parent"></ProgressBar>
-        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar07" android:layout_width="match_parent"></ProgressBar>
-        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar08" android:layout_width="match_parent"></ProgressBar>
-        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar09" android:layout_width="match_parent"></ProgressBar>
+    <LinearLayout android:orientation="vertical"
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:id="@+id/progressBars">
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar1" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar2" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar3" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar4" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar5" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar6" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar7" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar8" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar9" android:layout_width="match_parent"></ProgressBar>
         <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/progressBar10" android:layout_width="match_parent"></ProgressBar>
+   </LinearLayout>
         <TableLayout android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:layout_width="match_parent">
             <TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content" android:layout_height="wrap_content">
                 <Button android:id="@+id/sortButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sort"></Button>
