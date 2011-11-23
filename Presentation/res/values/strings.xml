@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Presentation</string>
+    
+    <!-- Style #1 Tab -->
+    <string name="styles_first_tab">Styles Example 1</string>
+    
+    <!-- Style #2 Tab -->
+    <string name="styles_second_tab">Styles Example 2</string>
+    
+    <!-- Theme #1 Tab -->
+    <string name="themes_first_tab">Themes Example 1</string>
+    
+    <!-- Theme #2 Tab -->
+    <string name="themes_second_tab">Themes Example 2</string>
+</resources>

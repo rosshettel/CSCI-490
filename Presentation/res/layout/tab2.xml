@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/tab2">
+    <!-- Tab #1 - Styles -->
+    <TableLayout android:layout_width="fill_parent" 
+                 android:layout_height="fill_parent" >
+        <TableRow>
+        <RadioGroup android:id="@+id/radioGroup1"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="50" >
+             <RadioButton   android:text="RadioButton1" 
+                            android:id="@+id/radioButton1"
+                            style="@style/RadioStyleYellow" />
+             <RadioButton   android:text="RadioButton2" 
+                            android:id="@+id/radioButton3" 
+                            style="@style/RadioStyleYellow" />
+             <RadioButton   android:text="RadioButton3" 
+                            android:id="@+id/radioButton4" 
+                            style="@style/RadioStyleYellow" />
+             <RadioButton   android:id="@+id/radioButton2" 
+                            android:text="RadioButton4"
+                            style="@style/RadioStyleYellow" />
+        </RadioGroup>
+        <EditText android:layout_weight="50"
+                  android:layout_width="10dip"
+                  android:editable="false"
+                  android:minLines="8"
+                  android:text="Here is an EditText that has\na whole bunch of text in it.\nAnd more text." />
+        </TableRow>
+        
+        <TableRow>
+            <CheckBox android:layout_weight="25"
+                      android:id="@+id/checkbox1"
+                      android:text="Checkbox Example"
+                      style="@style/CheckStyleGreen" />
+            <CheckBox android:layout_weight="25"
+                      android:id="@+id/checkbox2"
+                      android:text="Checkbox Example"
+                      style="@style/CheckStyleGreen" />
+            <CheckBox android:layout_weight="25"
+                      android:id="@+id/checkbox3"
+                      android:text="Checkbox Example"
+                      style="@style/CheckStyleGreen" />
+            <CheckBox android:layout_weight="25"
+                      android:id="@+id/checkbox4"
+                      android:text="Checkbox Example"
+                      style="@style/CheckStyleGreen" />
+        </TableRow>
+        <TableRow>
+            <TextView android:layout_weight="50"
+                      android:id="@+id/textview1"
+                      android:text="TextView Example"
+                      style="@style/TextViewStyleSmall" />
+            <TextView android:layout_weight="50"
+                      android:id="@+id/textview2"
+                      android:text="TextView Example"
+                      style="@style/TextViewStyleSmall" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
