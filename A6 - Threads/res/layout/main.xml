@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1">
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar01" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar02" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar03" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar04" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar05" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar06" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar07" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar08" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/ProgressBar09" android:layout_width="match_parent"></ProgressBar>
+        <ProgressBar style="?android:attr/progressBarStyleHorizontal" android:layout_height="wrap_content" android:id="@+id/progressBar10" android:layout_width="match_parent"></ProgressBar>
+        <TableLayout android:id="@+id/tableLayout1" android:layout_height="wrap_content" android:layout_width="match_parent">
+            <TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <Button android:id="@+id/sortButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sort"></Button>
+                <Button android:id="@+id/resetButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Reset"></Button>
+            </TableRow>
+            
+            <TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <TextView android:layout_height="wrap_content" android:id="@+id/textView2" android:text="TextView" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content"></TextView>
+                
+            </TableRow>
+            <TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            	<EditText android:id="@+id/cardDisplay" android:layout_height="wrap_content" android:layout_width="fill_parent"></EditText>
+            </TableRow>
+            <TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <Button android:id="@+id/reStartButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(re)Start"></Button>
+                <Button android:id="@+id/flipButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Flip"></Button>
+                <Button android:id="@+id/nextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Next"></Button>
+                <Button android:id="@+id/removeButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remove"></Button>
+            </TableRow>
+        </TableLayout>
+        <TextView android:id="@+id/clockText" android:text="TextView" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
+</LinearLayout>
