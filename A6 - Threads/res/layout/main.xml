@@ -26,7 +26,7 @@
     </LinearLayout>
     
     <!-- The flip card section -->
-    <EditText android:id="@+id/cardDisplay" android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center" android:padding="20dp"></EditText>
+    <TextView android:id="@+id/cardDisplay" android:text="Card goes here" android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center" android:textSize="30dp"/>
     <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:paddingBottom="15dp">
     	<Button android:id="@+id/reStartButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(re)Start"></Button>
         <Button android:id="@+id/flipButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Flip"></Button>

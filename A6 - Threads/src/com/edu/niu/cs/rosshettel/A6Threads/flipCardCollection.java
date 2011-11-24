@@ -4,6 +4,9 @@
 package com.edu.niu.cs.rosshettel.A6Threads;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -11,8 +14,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.util.Log;
 
 /**
- * @author NIU-STUDENT
- *
+ * This is the flipCardCollection class. Contains an array filled of card objects.
+ * Card objects contain 2 strings, frontText and backText.
+ * TODO: fix crash when we remove on a nearly empty list
  */
 public class flipCardCollection {
 	private static String logtag = "A6";
@@ -23,46 +27,41 @@ public class flipCardCollection {
 		public String backText;
 	}
 	
-	private card[] cards;
-	private int cardIndex;
+	private LinkedList<card> cards;
+	private ListIterator<card> cardItr;
+	private card currentCard;
 	
 	public flipCardCollection(XmlPullParser xpp)
 	{
-		int currentCard = 0;
+		card newCard = null; //temp card when reading xml
 				
 		try {
 			while(xpp.getEventType() != XmlPullParser.END_DOCUMENT)
 			{
 				if(xpp.getEventType() == XmlPullParser.START_TAG)
 				{
+					//initialize the card array to the right size
 					if(xpp.getName().equals("flipcards"))
-					{
-						//initialize the card array to the right size
-						int size = Integer.parseInt(xpp.getAttributeValue(1));
-						cards = new card[size];
-					}
+						cards = new LinkedList<card>();
 					
 					//now grab the cards
 					if(xpp.getName().equals("card"))
-					{
-						cards[currentCard] = new card();
-						Log.d(logtag, "created new card | #" + currentCard);
-					}
+						newCard = new card();
 					
 					//add the front side
 					if(xpp.getName().equals("frontside"))
-						cards[currentCard].frontText = (String)xpp.getAttributeValue(0);
+						newCard.frontText = (String)xpp.getAttributeValue(0);
 					
 					//add the back side
 					if(xpp.getName().equals("backside"))
-						cards[currentCard].backText = (String)xpp.getAttributeValue(0);
+						newCard.backText = (String)xpp.getAttributeValue(0);
 				}
 				
-				//increment the currentCard if we reached the end tag of card
+				//add the card to the queue if we reached the endtag of card
 				if(xpp.getEventType() == XmlPullParser.END_TAG)
 				{
 					if(xpp.getName().equals("card"))
-						currentCard++;
+						cards.add(newCard);
 				}
 				
 				//move to the next XMl tag
@@ -72,84 +71,67 @@ public class flipCardCollection {
 					Log.e(logtag, "IOException: " + e.getLocalizedMessage());
 				}
 			}
-		} catch(XmlPullParserException e)
-		{
+			
+			cardItr = cards.listIterator(0); //set up the iterator on the new list
+			currentCard = cardItr.next(); //set the current card to the first card
+		} catch(XmlPullParserException e) {
 			Log.e(logtag, "XmlPullParserException: " + e.getMessage());
 			return;
 		}
-		catch(ArrayIndexOutOfBoundsException e)
-		{
-			Log.d(logtag, "out of bounds) currentCard=" + currentCard + ", length=" + cards.length);
-		}
-	}
-	
-	public flipCardCollection(int size)
-	{
-		//initialize the new card array
-		cards = new card[size];
-	}
-	
-	public void setCardFrontText(String text)
-	{
-		cards[cardIndex].frontText = text;
-	}
-	
-	public void setCardFrontText(String text, int cardIndex)
-	{
-		cards[cardIndex].frontText = text;
-	}
-	
-	public void setCardBackText(String text)
-	{
-		cards[cardIndex].backText = text;
-	}
-	
-	public void setCardBackText(String text, int cardIndex)
-	{
-		cards[cardIndex].backText = text;
 	}
 		
+	//TODO: this is a bit redundant now we switched to a linked list
 	public String getFlipText(String currentSide)
-	{
+	{	
 		//compare the current side's text to the front, if it matches, return the flip side
-		if(currentSide == cards[cardIndex].frontText)
-			return cards[cardIndex].backText;
+		if(currentSide == currentCard.frontText)
+			return currentCard.backText;
 		//otherwise check the back side, if it matches, return the flip side
-		else if(currentSide == cards[cardIndex].backText)
-			return cards[cardIndex].frontText;
+		else if(currentSide == currentCard.backText)
+			return currentCard.frontText;
 		//otherwise we haven't found the right card, return the same string			
 		else
 			return currentSide;
 	}
 	
-	public String nextCard(int cardIndex)
+	public String getFrontText()
 	{
-		if(cardIndex < cards.length)
-			cardIndex = cardIndex+1;
-		else
-			cardIndex = 0;
-		
-		return cards[cardIndex].frontText;
+		return currentCard.frontText;
 	}
 	
-	public void removeCard(int cardToRemove)
-	{		
-		int i, j;
-		j = 0;
-		//create new array 1 less than current array
-		card[] newCardArray = new card[cards.length - 1];
-		
-		for(i = 0; i < cards.length; i++)
-		{
-			//copy the card over to the new array only if its not the index to be removed
-			if(i != cardToRemove)
-			{
-				newCardArray[j].frontText = cards[i].frontText;
-				newCardArray[j].backText = cards[i].backText;
-				j++;
-			}	
+	public String nextCard()
+	{
+		if(cardItr.hasNext())
+		{ //there is a next card, return that
+			currentCard = cardItr.next();
+			return currentCard.frontText;
 		}
-		//finally set the cards array to the new array
-		cards = newCardArray;
+		else
+		{ //reached the end of the list, try restarting at the beginning
+			cardItr = cards.listIterator(0);
+			try { 
+				currentCard = cardItr.next();
+				return currentCard.frontText;
+			} //otherwise the list is empty, return a string explaning that
+			catch(NoSuchElementException e) {
+				Log.d(logtag, "caught a NoSuchElementException: "+ e.getLocalizedMessage());
+				return "No more flip cards left";
+			}
+		}
+	}
+	
+	public void removeCard()
+	{
+		if(cards.size() > 0) //only call remove if theres something in the list
+		{
+			cardItr.remove();
+			currentCard = cardItr.next();
+		}
+	}
+	
+	public void moveToBeginning()
+	{
+		//reset the iterator at index 0
+		cardItr = cards.listIterator(0);
 	}
 }

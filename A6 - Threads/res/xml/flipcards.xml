@@ -3,7 +3,7 @@
        AUTHOR:    Ross Hettel, John Miller, Alex Wohead
        LOGON ID:  Z1549355, Z159807, Z1624450
        DUE DATE:   -->
-<flipcards name="flipcards" numCards="10">
+<flipcards numCards="3">
 	<card id="1">
 		<frontside text="1 * 2 = ?" />
 		<backside text="1 * 2 = 3" />
