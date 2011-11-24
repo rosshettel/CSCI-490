@@ -17,6 +17,7 @@ import android.util.Log;
  * This is the flipCardCollection class. Contains an array filled of card objects.
  * Card objects contain 2 strings, frontText and backText.
  * TODO: fix crash when we remove on a nearly empty list
+ * TODO: perhaps implement a shuffle feature here for restart
  */
 public class flipCardCollection {
 	private static String logtag = "A6";

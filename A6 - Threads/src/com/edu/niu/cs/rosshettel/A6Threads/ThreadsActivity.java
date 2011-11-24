@@ -1,6 +1,7 @@
 package com.edu.niu.cs.rosshettel.A6Threads;
 
 import java.util.Date;
+import java.util.Random;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -12,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,9 +21,13 @@ public class ThreadsActivity extends Activity {
 	//final/static variables
 	private static String logtag = "A6";
 	private static final int flipcards_XML = R.xml.flipcards;
+	private static final int sortWhat = 1;
+	private static final int clockWhat = 2;
 	
+	private int debugClockCounter = 0;
 	flipCardCollection flipcards;
 	boolean isRunning = false;
+	boolean isSortRunning = false;
 	
 	//the various views
 	TextView clockText, cardDisplay;
@@ -38,7 +42,22 @@ public class ThreadsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        //get the layout containing all the progress bars
+        //set up the sort
+        sortSetup();
+        
+        //set up the flipcards
+        flipCardSetup();
+        
+        //lets set up the clock thread
+        clockText = (TextView)findViewById(R.id.clockText);
+        
+    }
+    
+    public void sortSetup() {
+    	btnSort = (Button)findViewById(R.id.sortButton);
+    	btnReset = (Button)findViewById(R.id.resetButton);
+    	
+    	//get the layout containing all the progress bars
         LinearLayout progressBarViews = (LinearLayout)findViewById(R.id.progressBars);
         //set up the array of bars
         bars = new ProgressBar[progressBarViews.getChildCount()];
@@ -46,12 +65,120 @@ public class ThreadsActivity extends Activity {
         for(int i = 0; i < progressBarViews.getChildCount(); i++)
         	bars[i] = (ProgressBar)progressBarViews.getChildAt(i);
         
-        Log.d(logtag, "were about to start on creating the flipcards");  
-        flipCardSetup();
+        //initialize the bars to random values
+        bars = resetBars(bars);
         
-        //lets set up the clock thread
-        clockText = (TextView)findViewById(R.id.clockText);
+        //set the sort buttons onclicklistener
+        btnSort.setOnClickListener(new OnClickListener() {
+        	@Override
+        	public void onClick(View v)
+        	{
+//        		bars = sortBars(bars);
+        		
+        		Thread sort = new Thread(new Runnable() {
+        			public void run() {
+        				try {
+        					while(isSortRunning)
+        					{
+        						int i = 0;
+        						int j = 0;
+        						int min = 0;
+        						
+        						for(i = 0; i < bars.length - 1; i++)
+        				    	{
+        				    		min = i;
+        				    		for(j = i + 1; j < bars.length; j++)
+        				    		{
+        				    			if(bars[j].getProgress() < bars[min].getProgress())
+        				    				min = j;
+        				    		}
+        				    		if(min != i)
+        				    		{
+        				    			//this is where we swap
+        								Log.d(logtag, "swapping two bars: "+i+" and "+min);
+        								Thread.sleep(500); //sleep half a second
+        								handler.sendMessage(handler.obtainMessage(sortWhat, i, min));
+        				    		}
+        				    	}
+        						
+        						isSortRunning = false;
+        						
+        						Log.d(logtag, "we finished sorting - now breaking. i="+i+" / j="+j+" / min="+min);
+//        						break; //exit the thread now that we've sorted it
+        					}
+        				} catch (Throwable t) {
+        					Log.d(logtag, "we've reached the catch of the sort thread try/catch | " + t.getLocalizedMessage());
+        					//just end the sort thread
+        				}
+        			}
+        		});
+        		
+        		isSortRunning = true;
+        		sort.start();
+        	}
+        });
         
+        //set the reset buttons onclicklistener
+        btnReset.setOnClickListener(new OnClickListener() {
+        	@Override
+        	public void onClick(View v) { resetBars(bars); }
+        });
+    }
+    
+    Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch(msg.what) {
+				case sortWhat:
+				{
+					//arg1 == i, arg2 == min
+					int tmp = bars[msg.arg1].getProgress();
+					bars[msg.arg1].setProgress(bars[msg.arg2].getProgress());
+					bars[msg.arg2].setProgress(tmp);
+					break;
+				}
+				case clockWhat:
+				{
+					Date date = new Date();	//sometimes java can be a bit... redundant.
+					clockText.setText(debugClockCounter + " | " + date.toString());
+					debugClockCounter++;
+					break;
+				}
+			}
+		}
+	};
+    
+    public ProgressBar[] sortBars(ProgressBar[] bars)
+    {
+    	int i, j, min, tmp;
+    	
+    	for(i = 0; i < bars.length - 1; i++)
+    	{
+    		min = i;
+    		for(j = i + 1; j < bars.length; j++)
+    		{
+    			if(bars[j].getProgress() < bars[min].getProgress())
+    				min = j;
+    		}
+    		if(min != i)
+    		{
+    			tmp = bars[i].getProgress();
+    			bars[i].setProgress(bars[min].getProgress());
+    			bars[min].setProgress(tmp);
+    		}
+    	}
+    	
+    	return bars;
+    }
+    
+    public ProgressBar[] resetBars(ProgressBar[] bars)
+    {
+    	Random generator = new Random();
+    	
+    	for(int i = 0; i < bars.length; i++)
+    		bars[i].setProgress(generator.nextInt(100) + 1);
+    	
+    	return bars;
     }
     
     /**
@@ -99,6 +226,7 @@ public class ThreadsActivity extends Activity {
     		}
     	});
     	
+    	//set the remove buttons onclicklistener
     	btnRemove.setOnClickListener(new OnClickListener() {
     		@Override
     		public void onClick(View v) {
@@ -121,8 +249,7 @@ public class ThreadsActivity extends Activity {
     				while(isRunning)
     				{
     					Thread.sleep(1000); //wait one second
-    					//call the clockThread handler
-    					clockThread.sendMessage(clockThread.obtainMessage());
+    					handler.sendMessage(handler.obtainMessage(clockWhat));
     				}
 				} catch (Throwable t) {
 					Log.d(logtag, "we've reached the catch of the clock thread try/catch | " + t.getLocalizedMessage());
@@ -135,24 +262,20 @@ public class ThreadsActivity extends Activity {
     	clock.start();
     }
     
-    Handler clockThread = new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			Date date = new Date();	//sometimes java can be a bit... redundant.
-//			Log.d(logtag, "in handleMessage() - " + date.toString());
-			clockText.setText(date.toString());
-		}
-	};
+    
     
     public void onPause() {
     	Log.d(logtag, "in onPause()");
     	super.onPause();
     	isRunning = false;
+    	debugClockCounter = 0;
     }
     
     public void onStop() {
     	Log.d(logtag, "in onStop()");
     	super.onStop();
     	isRunning = false;
+    	debugClockCounter = 0;
     }
 }
+    
