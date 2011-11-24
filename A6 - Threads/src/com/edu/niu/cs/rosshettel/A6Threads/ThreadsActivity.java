@@ -2,9 +2,7 @@ package com.edu.niu.cs.rosshettel.A6Threads;
 
 import java.util.Date;
 import java.util.Random;
-
 import org.xmlpull.v1.XmlPullParser;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,10 +45,6 @@ public class ThreadsActivity extends Activity {
         
         //set up the flipcards
         flipCardSetup();
-        
-        //lets set up the clock thread
-        clockText = (TextView)findViewById(R.id.clockText);
-        
     }
     
     public void sortSetup() {
@@ -83,7 +77,7 @@ public class ThreadsActivity extends Activity {
         						int i = 0;
         						int j = 0;
         						int min = 0;
-        						
+        						        						
         						for(i = 0; i < bars.length - 1; i++)
         				    	{
         				    		min = i;
@@ -95,7 +89,7 @@ public class ThreadsActivity extends Activity {
         				    		if(min != i)
         				    		{
         				    			//this is where we swap
-        								Log.d(logtag, "swapping two bars: "+i+" and "+min);
+        								Log.d(logtag, "swapping ("+i+","+min+") because "+bars[i].getProgress()+" > "+bars[min].getProgress());
         								Thread.sleep(500); //sleep half a second
         								handler.sendMessage(handler.obtainMessage(sortWhat, i, min));
         				    		}
@@ -103,7 +97,7 @@ public class ThreadsActivity extends Activity {
         						
         						isSortRunning = false;
         						
-        						Log.d(logtag, "we finished sorting - now breaking. i="+i+" / j="+j+" / min="+min);
+        						Log.d(logtag, "we finished sorting - now breaking.");
 //        						break; //exit the thread now that we've sorted it
         					}
         				} catch (Throwable t) {
@@ -239,9 +233,12 @@ public class ThreadsActivity extends Activity {
     
     public void onResume() {
     	super.onResume();
-    	clockText.setText(new Date().toString());	//set the first time
     	Log.d(logtag, "in onResume()");
-    	    	
+    	
+    	//lets set up the clock thread
+        clockText = (TextView)findViewById(R.id.clockText);
+    	clockText.setText(new Date().toString());	//set the first time
+   	    	
     	Thread clock = new Thread(new Runnable() {
     		public void run() {
     			try {
@@ -268,6 +265,7 @@ public class ThreadsActivity extends Activity {
     	Log.d(logtag, "in onPause()");
     	super.onPause();
     	isRunning = false;
+    	isSortRunning = false;
     	debugClockCounter = 0;
     }
     
@@ -275,6 +273,7 @@ public class ThreadsActivity extends Activity {
     	Log.d(logtag, "in onStop()");
     	super.onStop();
     	isRunning = false;
+    	isSortRunning = false;
     	debugClockCounter = 0;
     }
 }
