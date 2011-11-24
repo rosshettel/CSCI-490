@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--   PROGRAM:   Assignment 6, flipcards.xml file
+       AUTHOR:    Ross Hettel, John Miller, Alex Wohead
+       LOGON ID:  Z1549355, Z159807, Z1624450
+       DUE DATE:   -->
+<flipcards name="flipcards" numCards="10">
+	<card id="1">
+		<frontside text="1 * 2 = ?" />
+		<backside text="1 * 2 = 3" />
+	</card>
+	<card id="2">
+		<frontside text="2 * 2 = ?" />
+		<backside text="2 * 2 = 4" />
+	</card>
+	<card id="3">
+		<frontside text="9 / 3 = ?" />
+		<backside text="9 / 3 = 3" />
+	</card>
+</flipcards>       

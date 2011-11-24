@@ -1,6 +1,9 @@
 package com.edu.niu.cs.rosshettel.A6Threads;
 
 import java.util.Date;
+
+import org.xmlpull.v1.XmlPullParser;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,16 +14,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class ThreadsActivity extends Activity {
-	private static int barCount = 10;
 	private static String logtag = "A6";
+	private static final int flipcards_XML = R.xml.flipcards;
+	
 	TextView clockText;
+	flipCardCollection flipcards;
 	boolean isRunning = false;
-	Date date;
+	
 	
 	Handler clockThread = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			date = new Date();
+			Date date = new Date();	//sometimes java can be a bit... redundant.
 			Log.d(logtag, "in handleMessage() - " + date.toString());
 			clockText.setText(date.toString());
 		}
@@ -42,16 +47,20 @@ public class ThreadsActivity extends Activity {
         for(int i = 0; i < progressBarViews.getChildCount(); i++)
         	bars[i] = (ProgressBar)progressBarViews.getChildAt(i);
         
+        Log.d(logtag, "were about to start on creating the flipcards");
+        //lets create the flipcard collection object
+        XmlPullParser xpp;
+        xpp = getResources().getXml(flipcards_XML);
+        flipcards = new flipCardCollection(xpp);
         
         //lets set up the clock thread
         clockText = (TextView)findViewById(R.id.clockText);
-        date = new Date();
         
     }
     
     public void onResume() {
     	super.onResume();
-    	clockText.setText(date.toString());
+    	clockText.setText(new Date().toString());	//set the first time
     	Log.d(logtag, "in onResume()");
     	    	
     	Thread clock = new Thread(new Runnable() {
@@ -85,5 +94,10 @@ public class ThreadsActivity extends Activity {
     	Log.d(logtag, "in onStop()");
     	super.onStop();
     	isRunning = false;
+    }
+    
+    public void onDestroy() {
+    	Log.d(logtag, "we reached onDestroy()");
+    	super.onDestroy();
     }
 }
