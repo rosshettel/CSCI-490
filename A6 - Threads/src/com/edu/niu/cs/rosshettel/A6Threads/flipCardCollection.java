@@ -84,20 +84,28 @@ public class flipCardCollection {
 	//TODO: this is a bit redundant now we switched to a linked list
 	public String getFlipText(String currentSide)
 	{	
-		//compare the current side's text to the front, if it matches, return the flip side
-		if(currentSide == currentCard.frontText)
-			return currentCard.backText;
-		//otherwise check the back side, if it matches, return the flip side
-		else if(currentSide == currentCard.backText)
-			return currentCard.frontText;
-		//otherwise we haven't found the right card, return the same string			
+		if(cards.size() == 0)
+			return "No more cards left.";
 		else
-			return currentSide;
+		{
+			//compare the current side's text to the front, if it matches, return the flip side
+			if(currentSide == currentCard.frontText)
+				return currentCard.backText;
+			//otherwise check the back side, if it matches, return the flip side
+			else if(currentSide == currentCard.backText)
+				return currentCard.frontText;
+			//otherwise we haven't found the right card, return the same string			
+			else
+				return currentSide;
+		}
 	}
 	
 	public String getFrontText()
 	{
-		return currentCard.frontText;
+		if(cards.size() == 0)
+			return "No more cards left.";
+		else
+			return currentCard.frontText;
 	}
 	
 	public String nextCard()
@@ -126,7 +134,11 @@ public class flipCardCollection {
 		if(cards.size() > 0) //only call remove if theres something in the list
 		{
 			cardItr.remove();
-			currentCard = cardItr.next();
+			try{
+				currentCard = cardItr.next();
+			} catch(NoSuchElementException e){
+				currentCard = null;
+			}
 		}
 	}
 	
