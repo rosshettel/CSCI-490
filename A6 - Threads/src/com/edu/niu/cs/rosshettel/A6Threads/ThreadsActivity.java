@@ -72,13 +72,11 @@ public class ThreadsActivity extends Activity {
         		Thread sort = new Thread(new Runnable() {
         			public void run() {
         				try {
-        					while(isSortRunning)
-        					{
         						int i = 0;
         						int j = 0;
         						int min = 0;
         						        						
-        						for(i = 0; i < bars.length; i++)
+        						for(i = 0; i < bars.length - 1; i++)
         				    	{
         				    		min = i;
         				    		for(j = i + 1; j < bars.length; j++)
@@ -90,17 +88,11 @@ public class ThreadsActivity extends Activity {
         				    		{
         				    			//this is where we swap
         								Log.d(logtag, "swapping ("+i+","+min+") because "+bars[i].getProgress()+" > "+bars[min].getProgress());
-        								Thread.sleep(500); //sleep half a second
         								handler.sendMessage(handler.obtainMessage(sortWhat, i, min));
+        								Thread.sleep(500); //sleep half a second
         				    		}
-        				    	}
-        				    	
-        				}
-        						
-        						//isSortRunning = false;
-        						
+        				    	}        						
         						Log.d(logtag, "we finished sorting - now breaking.");
-//        						break; //exit the thread now that we've sorted it
 
         				} catch (Throwable t) {
         					Log.d(logtag, "we've reached the catch of the sort thread try/catch | " + t.getLocalizedMessage());
