@@ -85,7 +85,7 @@ public class flipCardCollection {
 	public String getFlipText(String currentSide)
 	{	
 		if(cards.size() == 0)
-			return "No more cards left.";
+			return "No more flip cards left.";
 		else
 		{
 			//compare the current side's text to the front, if it matches, return the flip side
@@ -102,10 +102,10 @@ public class flipCardCollection {
 	
 	public String getFrontText()
 	{
-		if(cards.size() == 0)
-			return "No more cards left.";
-		else
+		if(currentCard != null)
 			return currentCard.frontText;
+		else
+			return nextCard();
 	}
 	
 	public String nextCard()
