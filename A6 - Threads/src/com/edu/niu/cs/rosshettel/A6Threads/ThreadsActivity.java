@@ -78,7 +78,7 @@ public class ThreadsActivity extends Activity {
         						int j = 0;
         						int min = 0;
         						        						
-        						for(i = 0; i < bars.length - 1; i++)
+        						for(i = 0; i < bars.length; i++)
         				    	{
         				    		min = i;
         				    		for(j = i + 1; j < bars.length; j++)
@@ -94,12 +94,14 @@ public class ThreadsActivity extends Activity {
         								handler.sendMessage(handler.obtainMessage(sortWhat, i, min));
         				    		}
         				    	}
+        				    	
+        				}
         						
-        						isSortRunning = false;
+        						//isSortRunning = false;
         						
         						Log.d(logtag, "we finished sorting - now breaking.");
 //        						break; //exit the thread now that we've sorted it
-        					}
+
         				} catch (Throwable t) {
         					Log.d(logtag, "we've reached the catch of the sort thread try/catch | " + t.getLocalizedMessage());
         					//just end the sort thread
