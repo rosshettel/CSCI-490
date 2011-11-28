@@ -3,17 +3,45 @@
        AUTHOR:    Ross Hettel, John Miller, Alex Wohead
        LOGON ID:  Z1549355, Z159807, Z1624450
        DUE DATE:   -->
-<flipcards numCards="3">
+<flipcards numCards="10">
 	<card id="1">
 		<frontside text="1 * 2 = ?" />
-		<backside text="1 * 2 = 3" />
+		<backside text="1 * 2 = 2" />
 	</card>
 	<card id="2">
-		<frontside text="2 * 2 = ?" />
-		<backside text="2 * 2 = 4" />
+		<frontside text="2 + 2 = ?" />
+		<backside text="2 + 2 = 4" />
 	</card>
 	<card id="3">
 		<frontside text="9 / 3 = ?" />
 		<backside text="9 / 3 = 3" />
+	</card>
+	<card id="4">
+		<frontside text="10 - 5 = ?" />
+		<backside text="10 - 5 = 5" />
+	</card>
+	<card id="5">
+		<frontside text="25 * 4 = ?" />
+		<backside text="25 * 4 = 100" />
+	</card>
+	<card id="6">
+		<frontside text="44 + 44 = ?" />
+		<backside text="44 + 44 = 88" />
+	</card>
+	<card id="7">
+		<frontside text="24 / 4 = ?" />
+		<backside text="24 / 4 = 6" />
+	</card>
+	<card id="8">
+		<frontside text="32 - 32 = ?" />
+		<backside text="32 - 32 = 0" />
+	</card>
+	<card id="9">
+		<frontside text="12 + 34 / 2 = ?" />
+		<backside text="12 + 34 / 2 = 29" />
+	</card>
+	<card id="10">
+		<frontside text="78 - 56 * 2 = ?" />
+		<backside text="78 - 56 * 2 = -34" />
 	</card>
 </flipcards>       
