@@ -21,17 +21,17 @@
    </LinearLayout>
    <!-- The sort control buttons -->
     <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:paddingBottom="15dp">
-       	<Button android:id="@+id/sortButton" android:layout_height="wrap_content" android:text="Sort" android:layout_width="100px"></Button>
+       	<Button android:id="@+id/sortButton" android:layout_height="wrap_content" android:text="Sort" android:layout_width="150dip"></Button>
         <Button android:id="@+id/resetButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Reset"></Button>
     </LinearLayout>
     
     <!-- The flip card section -->
     <TextView android:id="@+id/cardDisplay" android:text="Card goes here" android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center" android:textSize="30dp"/>
-    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:paddingBottom="15dp">
-    	<Button android:id="@+id/reStartButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(re)Start"></Button>
-        <Button android:id="@+id/flipButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Flip"></Button>
-        <Button android:id="@+id/nextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Next"></Button>
-        <Button android:id="@+id/removeButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remove"></Button>
+    <LinearLayout android:orientation="horizontal" android:weightSum="1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:paddingBottom="15dp">
+    	<Button android:id="@+id/reStartButton" android:layout_weight=".2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(re)Start"></Button>
+        <Button android:id="@+id/flipButton" android:layout_weight=".2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Flip"></Button>
+        <Button android:id="@+id/nextButton" android:layout_weight=".2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Next"></Button>
+        <Button android:id="@+id/removeButton" android:layout_weight=".2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Remove"></Button>
     </LinearLayout>
 
 	<!-- The clock text -->
